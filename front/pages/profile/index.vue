@@ -33,6 +33,7 @@
     <!--.profile-con__inner--left-->
 
     <div class="profile-con__inner--right">
+      <transition name="fade">
       <section class="profile-sec" v-show="isPage === 'Profile'">
         <div class="profile-sec__inner">
           <h2 class="profile-title">Profile</h2>
@@ -63,7 +64,9 @@
         <!--.profile-sec__inner-->
       </section>
       <!--.profile-sec #profileArea-->
+      </transition>
 
+      <transition name="fade">
       <section class="profile-sec skill-area" v-show="isPage === 'Skill'">
         <div class="profile-sec__inner">
           <h2 class="profile-title">Skill</h2>
@@ -476,6 +479,7 @@
         </div>
         <!--profile-sec__inner-->
       </section>
+      </transition>
     </div>
     <!--.profile-con__inner--right-->
   </div>
@@ -499,3 +503,12 @@ export default {
   }
 };
 </script>
+
+<style>
+.fade-enter-active, .fade-leave-active {
+  transition: all .2s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+</style>
