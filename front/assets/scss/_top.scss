@@ -1,0 +1,81 @@
+.top-container {
+  //background: #888888;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  max-width: 1000px;
+  @include sp {
+    width: 100%;
+  }
+}
+
+.to-admin-page {
+  text-align: right;
+  font-size: 2.4rem;
+  color: #ffffff;
+  padding: 5px;
+  &:hover {
+    text-decoration: underline;
+  }
+  @include sp {
+    font-size: 1.4rem;
+    letter-spacing: 0.1em;
+    text-decoration: underline;
+  }
+}
+
+.key {
+  font: {
+    size: 10rem;
+    style: italic;
+  }
+  letter-spacing: 0.2em;
+  text-align: center;
+  margin: 20vh 0;
+  @include sp {
+    font-size: 4rem;
+    letter-spacing: 0.1em;
+  }
+}
+
+.top-nav {
+  text-align: center;
+  margin: 0 auto 10vh;
+  li {
+    margin-bottom: 20px;
+    a {
+      color: #ffffff;
+      display: block;
+      font-size: 4.8rem;
+      letter-spacing: 0.5rem;
+      &:hover {
+        &:before {
+          content: "";
+          display: inline-block;
+          width: 42px;
+          height: 42px;
+          background: url("/portfolio-iwai/img/menu_hover.gif") no-repeat center center/contain;
+        }
+      }
+    }
+  }
+  @include sp {
+    margin: 0 auto 16vh;
+    li {
+      margin-bottom: 28px;
+      a {
+        font-size: 2.8rem;
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+.copy {
+  font-size: 2.8rem;
+  letter-spacing: 0.2em;
+  text-align: center;
+  @include sp {
+    font-size: 2rem;
+  }
+}

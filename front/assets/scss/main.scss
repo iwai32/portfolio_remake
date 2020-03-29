@@ -1,0 +1,18 @@
+@import "reset", "mixin", "top";
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  background: #555;
+  color: #fff;
+  font-family: "Play", "Hiragino Kaku Gothic ProN", "メイリオ", sans-serif;
+}
+
+.sp-on {
+  display: none;
+  @include sp{
+    display: block;
+  }
+}
