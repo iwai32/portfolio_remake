@@ -12,13 +12,13 @@
             <nuxt-link to="/">top</nuxt-link>
           </li>
           <li class="navs__list current">
-            <nuxt-link to="profile/">profile</nuxt-link>
+            <nuxt-link to="/profile/">profile</nuxt-link>
           </li>
           <li class="navs__list">
-            <nuxt-link to="works/">Works</nuxt-link>
+            <nuxt-link to="/works/">works</nuxt-link>
           </li>
           <li class="navs__list">
-            <a href="https://github.com/iwai32?tab=repositories" target="_blank">Github</a>
+            <a href="https://github.com/iwai32?tab=repositories" target="_blank">github</a>
           </li>
         </ul>
       </nav>
