@@ -1,0 +1,477 @@
+.profile-con {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 40px auto 0;
+  padding: 20px 1.28%;
+  max-width: 1000px;
+  &__inner--left {
+    width: 27%; //260px
+  }
+  &__inner--right {
+    width: 68.75%; //660
+  }
+  @include sp {
+    display: block;
+    margin: 20px auto 0;
+    &__inner--left {
+      background: #444;
+      display: flex;
+      justify-content: space-between;
+      width: 100%; //260
+      height: 100px;
+      min-height: 100px;
+      position: fixed;
+      bottom: 0;
+      z-index: 2000;
+    }
+    &__inner--right {
+      width: 100%; //660
+      margin-bottom: 20vh;
+    }
+  }
+}
+
+.icon-photo {
+  border: 4px solid #fff {
+    radius: 10px;
+  }
+  box-shadow: 4px 4px #777;
+  cursor: pointer;
+  margin-bottom: 40px;
+  transition: 0.2s;
+  //width: 260px;
+  &:hover {
+    box-shadow: none;
+    opacity: 0.6;
+  }
+  @include sp {
+    width: 20%;
+    height: 12vh;
+    min-height: 80px;
+    text-align: center;
+    img{
+      max-height: 100%;
+    }
+  }
+}
+
+.profile-navs {
+  margin-bottom: 40px;
+  &__list {
+    border: 4px solid #fff {
+      radius: 10px;
+    }
+    box-shadow: 8px 8px #777;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 10px;
+    transition: 0.2s;
+    .fa-arrow-right {
+      display: none;
+      font-size: 2.8rem;
+    }
+    span {
+      font-size: 2.8rem;
+      letter-spacing: 0.25rem;
+    }
+    &.active {
+      .fa-arrow-right {
+        display: block;
+      }
+    }
+    &:hover {
+      box-shadow: none;
+      opacity: 0.6;
+      .fa-arrow-right {
+        display: block;
+      }
+    }
+  }
+  @include sp {
+    margin-bottom: 0;
+    width: 30%;
+    &__list {
+      border: 4px solid #fff {
+        radius: 20px;
+      }
+      box-shadow: none;
+      margin-bottom: 0;
+      padding: 8px 6.7%;
+      .fa-arrow-right {
+        display: none;
+        font-size: 1.4rem;
+      }
+      span {
+        font-size: 1.6rem;
+        letter-spacing: 0.25rem;
+      }
+    }
+    &__list + &__list {
+      margin: 0;
+    }
+  }
+}
+
+.profile-typ {
+  border: 4px solid #fff {
+    radius: 10px;
+  }
+  padding: 10px;
+  position: relative;
+  height: 200px;
+  &:after {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 48px;
+    height: 48px;
+  }
+  &__txt {
+    font-size: 2rem;
+    line-height: 1.4;
+  }
+  @include sp {
+    padding: 5px 1%;
+    height: 80px;
+    width: 50%;
+    &:after {
+      width: 24px;
+      height: 24px;
+    }
+    &__txt {
+      font-size: 1.2rem;
+      line-height: 1.2;
+    }
+  }
+}
+
+.skill-area {
+  @include sp{
+    margin-bottom: 220px;
+  }
+}
+
+.profile-sec {
+  border: 4px solid #fff {
+    radius: 10px;
+  }
+  &__inner {
+    padding: 20px;
+    .profile-title {
+      font-size: 3.6rem; //4.8
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .my-name {
+      font-size: 2.6rem;
+      margin-bottom: 20px;
+    }
+    .about-me {
+      padding: 4px 0;
+      &__list {
+        font-size: 1.8rem;
+        line-height: 1.2;
+        margin-bottom: 8px;
+      }
+    }
+
+    .under-line {
+      margin-bottom: 20px;
+    }
+
+    .career {
+      font-size: 1.8rem;
+      padding: 4px 0;
+      &__term{
+        margin-bottom: 10px;
+      }
+      &__desc{
+        margin-bottom: 20px;
+      }
+    }
+
+    .pr {
+      font-size: 1.6rem;
+      line-height: 1.6;
+      letter-spacing: -0.08em;
+      margin-bottom: 10px;
+      padding: 4px 0;
+      position: relative;
+      &::before {
+        content: "";
+        display: block;
+        background: #fff;
+        position: absolute;
+        top: 12px;
+        left: -12px;
+        width: 8px;
+        height: 8px;
+      }
+    }
+  }
+  @include sp {
+    &__inner {
+      padding: 10px 2.8%;
+      .profile-title {
+        font-size: 2.4rem; //4.8
+        margin-bottom: 10px;
+      }
+      .my-name {
+        font-size: 1.8rem;
+        margin-bottom: 10px;
+      }
+      .about-me {
+        padding: 4px 0;
+        &__list {
+          font-size: 1.4rem;
+          line-height: 1.2;
+          margin-bottom: 6px;
+        }
+      }
+
+      .under-line {
+        margin-bottom: 10px;
+      }
+
+      .career {
+        font-size: 1.4rem;
+        line-height: 1.4;
+        padding: 4px 0;
+        &__term,
+        &__desc {
+          margin-bottom: 10px;
+          line-height: 1.4;
+        }
+      }
+
+      .pr {
+        font-size: 1.4rem;
+        line-height: 1.4;
+        letter-spacing: 0.02em;
+        padding: 4px 0;
+        position: relative;
+        margin-bottom: 4px;
+        &::before {
+          top: 10px;
+          left: -8px;
+          width: 6px;
+          height: 6px;
+        }
+      }
+    }
+  }
+}
+
+.skill-con {
+  &__inner--top {
+    margin-bottom: 20px;
+  }
+  &__inner--bottom {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    width: 100%;
+    margin: 0 auto;
+  }
+  @include sp {
+    display: flex;
+    flex-wrap: wrap;
+    &__inner--bottom {
+      background: #444;
+      position: fixed;
+      bottom: 100px;
+      right:0;
+      z-index: 1000;
+      width: 50%;
+    }
+  }
+}
+
+.skill-category {
+  display: flex;
+  flex-flow: row wrap;
+  &__list { 
+    width: 100%;
+    margin-bottom: 30px;
+    &__title {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+    }
+    // &--lang {
+    //   width: 100%;
+    // }
+    // &--editor {
+    //   margin-right: 40px;
+    // }
+  }
+  @include sp {
+    &__list {
+      margin-bottom: 0;
+      width: 50%;
+      &__title {
+        font-size: 1.2rem;
+        margin-left: 8%;
+      }
+      &--editor {
+        margin-right: 0;
+      }
+    }
+  }
+}
+
+.skill-items {
+  display: flex;
+  flex-wrap: wrap;
+  &__list {
+    border: 2px solid #fff {
+      radius: 6px;
+    }
+    box-shadow: 6px 6px #666;
+    cursor: pointer;
+    font-style: italic;
+    letter-spacing: 0.2em;
+    margin: 0{
+      right: 3%;
+      bottom: 20px;
+    } 
+    padding: 6px;
+    text: {
+      align: center;
+      shadow: -1px -1px 1px #ffffff, 1px 1px #000000;
+    }
+    transition: 0.2s;
+    width: 80px;
+    &:hover {
+      box-shadow: none;
+      color: #666;
+    }
+
+    &__title {
+      font-size: 1.6rem;
+    }
+    &__logo {
+      margin: 10px auto;
+      width: 60px; //50%
+      height: 28px;
+    }
+    &__level {
+      font-size: 1.6rem;
+      //letter-spacing: .2em;
+    }
+  }
+  &__list.active {
+    box-shadow: none;
+    color: #666;
+    opacity: 0.6;
+  }
+  @include sp {
+    display: flex;
+    flex-wrap: wrap;
+    &__list {
+      letter-spacing: 0.05em;
+      margin: 0 6% 10px;
+      padding: 6px 3px;
+      text-shadow: none;
+      width: 35%; //60px
+      &:nth-child(even){
+        margin-right: 0;
+      }
+      &__title {
+        font-size: 1.2rem;
+      }
+      &__logo {
+        margin: 5px auto;
+        width: 60px; //50%
+        height: 20px;
+      }
+      &__level {
+        font-size: 1rem;
+        //letter-spacing: .2em;
+      }
+    }
+  }
+}
+
+.skill-status {
+  border: 4px solid #fff {
+    radius: 10px;
+  }
+  margin: 0 auto 20px;
+  padding: 20px;
+  height: 230px;
+  width: 100%;
+  &__title {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    text-align: center;
+    &__logo {
+      width: 40px;
+      height: 40px;
+      margin-left: 10px;
+    }
+  }
+
+  &__point {
+    font-size: 1.8rem;
+    line-height: 1.7;
+    margin-bottom: 20px;
+    position: relative;
+    &:last-child {
+      margin-bottom: 0;
+    }
+    &::before {
+      content: "";
+      background: #fff;
+      border-radius: 50%;
+      display: block;
+      position: absolute;
+      top: 12px;
+      left: -10px;
+      width: 6px;
+      height: 6px;
+    }
+  }
+
+  @include sp {
+    margin: 0;
+    padding: 4px 4%;
+    height: 142px;
+    min-height: 142px; 
+    height: auto;
+    &__title {
+      font-size: 2.2rem;
+      margin-bottom: 10px;
+      text-align: center;
+      &__logo {
+        width: 22px;
+        height: 22px;
+        margin-left: 10px;
+      }
+    }
+    &__point {
+      display: flex;
+      flex-direction: center;
+      font-size: 1.3rem;
+      margin: 0 {
+        bottom: 5px;
+        left: 2.8%;
+      }
+      position: relative;
+      &:last-child {
+        margin-bottom: 0;
+      }
+      &::before {
+        position: absolute;
+        top: 6px;
+        left: -8px;
+        width: 6px;
+        height: 6px;
+      }
+    }
+  }
+}

@@ -1,14 +1,14 @@
 <template>
   <div class="top-container">
-    <nuxt-link to='/admin/' class="to-admin-page">admin</nuxt-link>
+    <nuxt-link to='admin/' class="to-admin-page">admin</nuxt-link>
     <h1 class="key">Iwai's Portfolio</h1>
 
     <ul class="top-nav">
       <li>
-        <a href="profile/">Profile</a>
+        <nuxt-link to="profile/">Profile</nuxt-link>
       </li>
       <li>
-        <a href="works/">Works</a>
+        <nuxt-link to="works/">Works</nuxt-link>
       </li>
       <li>
         <a href="https://github.com/iwai32?tab=repositories" target="_blank">Github</a>
@@ -21,7 +21,9 @@
 </template>
 
 <script>
-export default {};
+export default {
+  layout: 'top'
+};
 </script>
 
 <style>
