@@ -5,7 +5,7 @@
       <!--Works-->
       <div class="works-con__inner--top">
         <ul class="works-list">
-          <li class="work-item">
+          <li class="work-item" v-show="showStatus === 0 || showStatus === 1">
             <a
               class="work-item__frame"
             >
@@ -14,7 +14,7 @@
             <h3 class="work-item__title">RpgRanker</h3>
             <p class="work-item__category">自主制作</p>
           </li>
-          <li class="work-item">
+          <li class="work-item" v-show="showStatus === 0 || showStatus === 1">
             <a
               class="work-item__frame"
             >
@@ -24,7 +24,7 @@
             <p class="work-item__category">自主制作</p>
           </li>
 
-          <li class="work-item">
+          <li class="work-item" v-show="showStatus === 0 || showStatus === 2">
             <a
               class="work-item__frame"
             >
@@ -34,7 +34,7 @@
             <p class="work-item__category">インターンシップ</p>
           </li>
 
-          <li class="work-item">
+          <li class="work-item" v-show="showStatus === 0 || showStatus === 2">
             <a
               class="work-item__frame"
             >
@@ -44,7 +44,7 @@
             <p class="work-item__category">インターンシップ</p>
           </li>
 
-          <li class="work-item">
+          <li class="work-item" v-show="showStatus === 0 || showStatus === 2">
             <a
               class="work-item__frame"
             >
@@ -54,7 +54,7 @@
             <p class="work-item__category">インターンシップ</p>
           </li>
 
-          <li class="work-item">
+          <li class="work-item" v-show="showStatus === 0 || showStatus === 2">
             <a
               class="work-item__frame"
             >
@@ -64,7 +64,7 @@
             <p class="work-item__category">インターンシップ</p>
           </li>
 
-          <li class="work-item">
+          <li class="work-item" v-show="showStatus === 0 || showStatus === 3">
             <a
               class="work-item__frame"
             >
@@ -74,7 +74,7 @@
             <p class="work-item__category">クライアントワーク</p>
           </li>
 
-          <li class="work-item">
+          <li class="work-item" v-show="showStatus === 0 || showStatus === 4">
             <a
               class="work-item__frame"
             >
@@ -84,7 +84,7 @@
             <p class="work-item__category">学校制作物</p>
           </li>
 
-          <li class="work-item">
+          <li class="work-item" v-show="showStatus === 0 || showStatus === 4">
             <a
               class="work-item__frame"
             >
@@ -94,7 +94,7 @@
             <p class="work-item__category">学校制作物</p>
           </li>
 
-          <li class="work-item">
+          <li class="work-item" v-show="showStatus === 0 || showStatus === 4">
             <a
               class="work-item__frame"
             >
@@ -104,7 +104,7 @@
             <p class="work-item__category">学校制作物</p>
           </li>
 
-          <li class="work-item">
+          <li class="work-item" v-show="showStatus === 0 || showStatus === 4">
             <a
               class="work-item__frame"
             >
@@ -114,7 +114,7 @@
             <p class="work-item__category">学校制作物</p>
           </li>
 
-          <li class="work-item">
+          <li class="work-item" v-show="showStatus === 0 || showStatus === 4">
             <a
               class="work-item__frame"
             >
@@ -124,7 +124,7 @@
             <p class="work-item__category">学校制作物</p>
           </li>
 
-          <li class="work-item">
+          <li class="work-item" v-show="showStatus === 0 || showStatus === 5">
             <a
               class="work-item__frame"
             >
@@ -134,7 +134,7 @@
             <p class="work-item__category">グラフィック</p>
           </li>
 
-          <li class="work-item">
+          <li class="work-item" v-show="showStatus === 0 || showStatus === 5">
             <a
               class="work-item__frame"
             >
@@ -144,7 +144,7 @@
             <p class="work-item__category">グラフィック</p>
           </li>
 
-          <li class="work-item">
+          <li class="work-item" v-show="showStatus === 0 || showStatus === 5">
             <a
               class="work-item__frame"
             >
@@ -200,7 +200,8 @@ export default {
   data() {
     return {
       typText: 'こちらは今までの制作物を紹介するページです',
-      workHeading: 'Works'
+      workHeading: 'Works',
+      showStatus: 0
     }
   },
   methods: {
@@ -210,21 +211,27 @@ export default {
       switch( pageName ) {
         case '自主制作':
           this.typText = '趣味や学習のために制作した作品を紹介しています。';
+          this.showStatus = 1
           break;
         case 'インターンシップ':
           this.typText = `株式会社ワンゴジュウゴインターンシップにて制作した作品を紹介しています。実務で活躍しているプロの元で実践的なコーディングを学べた貴重な経験でした。`
+          this.showStatus = 2
           break;
         case 'クライアントワーク':
           this.typText = `クライアントワークとは,フェリカテクニカルアカデミーで行われている実習の一つです。クライアントの要望を聞き、実際に使われるWebサイトができるのがこの実習のポイントです。`
+          this.showStatus = 3
           break;
         case '学校制作':
           this.typText = `フェリカテクニカルアカデミー・webサイト制作科で制作した作品を紹介しています。様々なレイアウト手法を学びました。`
+          this.showStatus = 4
           break;
         case 'グラフィック':
           this.typText = `photoshop,Illustratorを使用して制作したグラフィックの紹介です。`
+          this.showStatus = 5
           break;
         case 'Works':
           this.typText = 'こちらは今までの制作物を紹介するページです';
+          this.showStatus = 0
           break;
       }
     }

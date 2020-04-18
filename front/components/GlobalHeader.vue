@@ -8,13 +8,13 @@
       </h1>
       <nav id="g-nav">
         <ul class="navs">
-          <li class="navs__list">
+          <li class="navs__list" :class="{ current: this.$route.name === '/' }">
             <nuxt-link to="/">top</nuxt-link>
           </li>
-          <li class="navs__list current">
+          <li class="navs__list" :class="{ current: this.$route.name === 'profile' }">
             <nuxt-link to="/profile/">profile</nuxt-link>
           </li>
-          <li class="navs__list">
+          <li class="navs__list" :class="{ current: this.$route.name === 'works' }">
             <nuxt-link to="/works/">works</nuxt-link>
           </li>
           <li class="navs__list">
