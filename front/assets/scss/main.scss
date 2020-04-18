@@ -10,6 +10,14 @@ body {
   font-family: "Play", "Hiragino Kaku Gothic ProN", "メイリオ", sans-serif;
 }
 
+/*トランジション*/
+.page-enter-active, .page-leave-active {
+  transition: opacity .4s
+}
+.page-enter, .page-leave-active {
+  opacity: 0
+}
+
 .sp-on {
   display: none;
   @include sp{

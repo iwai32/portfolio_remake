@@ -14,6 +14,9 @@
           <li class="navs__list" :class="{ current: this.$route.name === 'profile' }">
             <nuxt-link to="/profile/">profile</nuxt-link>
           </li>
+          <li class="navs__list" :class="{ current: this.$route.name === 'skill' }">
+            <nuxt-link to="/skill/">skill</nuxt-link>
+          </li>
           <li class="navs__list" :class="{ current: this.$route.name === 'works' }">
             <nuxt-link to="/works/">works</nuxt-link>
           </li>

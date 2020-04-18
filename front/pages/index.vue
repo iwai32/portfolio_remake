@@ -1,6 +1,6 @@
 <template>
   <div class="top-container">
-    <nuxt-link to='admin/' class="to-admin-page">admin</nuxt-link>
+    <nuxt-link to="admin/" class="to-admin-page">admin</nuxt-link>
     <h1 class="key">Iwai's Portfolio</h1>
 
     <ul class="top-nav">
@@ -22,9 +22,15 @@
 
 <script>
 export default {
-  layout: 'top'
+  layout: "top"
 };
 </script>
 
 <style>
+.top-container {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
 </style>

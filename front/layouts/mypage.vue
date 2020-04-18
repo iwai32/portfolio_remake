@@ -3,7 +3,7 @@
     <GlobalHeader/>
     <main>
       <transition name="page">
-      <nuxt />
+        <nuxt />
       </transition>
     </main>
   </div>
@@ -21,4 +21,5 @@ export default {
 
 
 <style>
+
 </style>
