@@ -21,7 +21,7 @@ class ProfileController extends Controller
    */
   public function getMyProfile()
   {
-    return profileResource::collection($this->profile->with('profilePr', 'specialSkill', 'specialHobby', 'profileCareer')->get());
+    return profileResource::make($this->profile->with('profilePr', 'specialSkill', 'specialHobby', 'profileCareer')->first());
   }
 
   /**

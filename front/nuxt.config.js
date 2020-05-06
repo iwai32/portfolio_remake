@@ -1,6 +1,6 @@
 
 export default {
-  mode: 'universal',
+  mode: 'spa',
   /*
   ** Headers of the page
   */
@@ -33,7 +33,8 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    {src: '@/plugins/vue-typer', ssr: false}
+    {src: '@/plugins/vue-typer', ssr: false},
+    '@/plugins/moment'
   ],
   /*
   ** Nuxt.js dev-modules
@@ -44,6 +45,7 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
+    "@nuxtjs/axios",
   ],
   /*
   ** Build configuration
@@ -54,5 +56,19 @@ export default {
     */
     extend (config, ctx) {
     }
+  },
+  /** Nuxt.js axios
+  */
+  axios: {
+    proxy: true
+  },
+
+  proxy: {
+    '/api': {
+      target: 'http://127.0.0.1:8000/',
+      pathRewrite: {
+        '^/' : '/'
+        }
+      }
   }
 }
