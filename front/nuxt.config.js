@@ -1,3 +1,4 @@
+import webpack from 'webpack'
 
 export default {
   mode: 'spa',
@@ -34,7 +35,8 @@ export default {
   */
   plugins: [
     {src: '@/plugins/vue-typer', ssr: false},
-    '@/plugins/moment'
+    '@/plugins/moment',
+    "@/plugins/lodash.js",
   ],
   /*
   ** Nuxt.js dev-modules
@@ -54,8 +56,15 @@ export default {
     /*
     ** You can extend webpack config here
     */
-    extend (config, ctx) {
-    }
+   plugins: [
+     new webpack.ProvidePlugin({
+       // グローバルなモジュール
+       '$': 'jquery',
+       '_': 'lodash'
+     }),
+     // extend (config, ctx) {
+     // }
+   ],
   },
   /** Nuxt.js axios
   */
