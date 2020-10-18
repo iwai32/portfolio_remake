@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class ProfileSpecialSkillTableSeeder extends Seeder
 {
@@ -14,8 +15,10 @@ class ProfileSpecialSkillTableSeeder extends Seeder
   {
     DB::table('profile_special_skill')->truncate();
     DB::table('profile_special_skill')->insert([
-      'content' => 'サッカー,ポジション(MF)',
-      'profile_id' => 1
+      'content' => 'サッカー',
+      'profile_id' => 1,
+      'created_at' => Carbon::now(),
+      'updated_at' => Carbon::now()
     ]);
   }
 }

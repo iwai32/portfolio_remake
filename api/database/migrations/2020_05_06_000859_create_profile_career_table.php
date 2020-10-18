@@ -15,9 +15,10 @@ class CreateProfileCareerTable extends Migration
     {
         Schema::create('profile_career', function (Blueprint $table) {
             $table->id();
-            $table->date('date_from');
-            $table->date('date_to');
-            $table->string('content', 100);
+            $table->date('date_from')->comment('期間始まり');
+            $table->date('date_to')->nullable()->comment('期間終わり');
+            $table->string('content', 100)->comment('企業名');
+            $table->string('occupation', 100)->nullable()->comment('職種');
             $table->bigInteger('profile_id')->unsigned();
             $table->foreign('profile_id')->references('id')->on('profile');
             $table->timestamps();

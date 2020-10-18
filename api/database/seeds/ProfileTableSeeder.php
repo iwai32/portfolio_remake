@@ -17,7 +17,10 @@ class ProfileTableSeeder extends Seeder
       DB::table('profile')->insert([
         'name' => '岩井康平',
         'birth_day' => Carbon::create(1997,3,2),
-        'one_thing' => '好きな食べ物はステーキです！'
+        'one_thing' => '好きな食べ物はステーキです！',
+        'my_icon_img' => 'profile-photo.png',
+        'created_at' => Carbon::now(),
+        'updated_at' => Carbon::now(),
       ]);
     }
 }
