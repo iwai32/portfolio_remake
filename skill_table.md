@@ -1,1 +1,48 @@
-test skill
+### 作成テーブル
+
+- カテゴリー
+- カテゴリー詳細
+- カテゴリーへのコメント
+
+<br>
+
+### カテゴリー skill_category
+
+|  #  |  論理名  |  物理名  |  データ型  |  NULL  |  デフォルト値  |  コメント | 
+| ---- | ---- | ---- | ---- | ---- | ---- | ---- | 
+|  1  | カテゴリーid   |  id  |  int  |  ×  |    |    | 
+|  2  |  アイコン画像  |  skill_icon_img  |  varchar  |  ○  |  no_skill_icon.img  |    | 
+|  3  |  作成日  |  created_at  |  datetime  |  ○  |    |    | 
+|  4  |  更新日  |  updated_at  |  datetime  |  ○  |    |    | 
+
+<br>
+<br>
+<br>
+
+### カテゴリー詳細 skll_category_detail
+
+|  #  |  論理名  |  物理名  |  データ型  |  NULL  |  デフォルト値  |  コメント | 
+| ---- | ---- | ---- | ---- | ---- | ---- | ---- | 
+|  1  |  カテゴリー詳細ID  |  id |  int  |  ×  |    |    | 
+|  2  |  メッセージ  |  message  |  varchar  |  ×  |    |    | 
+|  3  |  カテゴリーID  |  category_id  |  int  |  ×  |    |    | 
+|  4  |  作成日  |  created_at  |  datetime  |  ○  |    |    | 
+|  5  |  更新日  |  updated_at  |  datetime  |  ○  |    |    | 
+
+<br>
+<br>
+<br>
+
+### カテゴリーへのコメント skill_category_comment
+
+|  #  |  論理名  |  物理名  |  データ型  |  NULL  |  デフォルト値  |  コメント | 
+| ---- | ---- | ---- | ---- | ---- | ---- | ---- | 
+|  1  |  コメントID  |  id  |  int  |  ×  |    |   | 
+|  2  |  コメント  | comment |  varchar  | × |    |    | 
+|  3  |  カテゴリーID  |  category_id  |  int  |  ×  |    |    | 
+|  4  |  作成日  |  created_at  |  datetime  |  ○  |    |    | 
+|  5  |  更新日  |  updated_at  |  datetime  |  ○  |    |    | 
+
+<br>
+<br>
+<br>
