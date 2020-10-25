@@ -13,19 +13,25 @@
             </li>
             <li class="about-me__list">
               特技は
-              <span
-                v-for="(skill, skillKey) in profileData.special_skill"
-                :key="skillKey"
-                >{{ skill.content }}</span
-              >
+              <span v-if="!_.isEmpty(profileData.special_skill)">
+                <span
+                  v-for="(skill, skillKey) in profileData.special_skill"
+                  :key="skillKey"
+                  >{{ skill.content }}</span
+                >
+              </span>
+              <span v-else>ありません</span>
             </li>
             <li class="about-me__list">
               趣味は
-              <span
-                v-for="(hobby, hobbyKey) in profileData.special_hobby"
-                :key="hobbyKey"
-                >{{ hobby.content }}</span
+              <span v-if="!_.isEmpty(profileData.special_hobby)"
+                ><span
+                  v-for="(hobby, hobbyKey) in profileData.special_hobby"
+                  :key="hobbyKey"
+                  >{{ hobby.content }}</span
+                ></span
               >
+              <span v-else>ありません</span>
             </li>
           </ul>
           <hr class="under-line" />
@@ -41,7 +47,7 @@
             </dt>
             <dd class="career__desc">
               <div>{{ career.content }}</div>
-              <div class="occupation">({{career.occupation}})</div>
+              <div class="occupation">({{ career.occupation }})</div>
             </dd>
           </dl>
           <hr class="under-line" />
@@ -83,12 +89,16 @@ export default {
   computed: {
     careerDateFrom(date_from) {
       return function (date_from) {
-        return !_.isNull(date_from) ? this.$moment(date_from).format("YYYY年MM月DD日"): "";
+        return !_.isNull(date_from)
+          ? this.$moment(date_from).format("YYYY年MM月DD日")
+          : "";
       };
     },
     careerDateTo(date_to) {
       return function (date_to) {
-        return !_.isNull(date_to) ? this.$moment(date_to).format("YYYY年MM月DD日"): "";
+        return !_.isNull(date_to)
+          ? this.$moment(date_to).format("YYYY年MM月DD日")
+          : "";
       };
     },
     ...mapGetters({
