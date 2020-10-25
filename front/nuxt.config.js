@@ -1,6 +1,9 @@
 import webpack from 'webpack'
 
 export default {
+  env: {
+    API_URL: process.env.API_URL
+  },
   mode: 'spa',
   /*
   ** Headers of the page
@@ -74,7 +77,7 @@ export default {
 
   proxy: {
     '/api': {
-      target: 'http://127.0.0.1:8000/',
+      target: process.env.API_URL,
       pathRewrite: {
         '^/' : '/'
         }

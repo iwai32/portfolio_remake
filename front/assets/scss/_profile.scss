@@ -392,7 +392,7 @@
   @include sp {
     &__list {
       margin-bottom: 0;
-      width: 50%;
+      width: 100%;
 
       &__title {
         font-size: 1.2rem;
@@ -493,6 +493,10 @@
       }
     }
   }
+}
+
+.skill-status-wrapp {
+  width: 100%;
 }
 
 .skill-status {
