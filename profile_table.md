@@ -12,7 +12,7 @@
 
 |  #  |  論理名  |  物理名  |  データ型  |  NULL  |  デフォルト値  |  コメント | 
 | ---- | ---- | ---- | ---- | ---- | ---- | ---- | 
-|  1  | プロフィールid   |  id  |  int  |  ×  |    |    | 
+|  1  | プロフィールid   |  id  |  bigint  |  ×  |    |    | 
 |  2  |  名前  |  name |  varchar  |  ×  |    |    | 
 |  3  |  誕生日  |  birth_day  |  datetime  |  ○  |    |    | 
 |  4  |  一言  |  one_thing  |  varchar  |  ○  |    |    | 
@@ -28,9 +28,9 @@
 
 |  #  |  論理名  |  物理名  |  データ型  |  NULL  |  デフォルト値  |  コメント | 
 | ---- | ---- | ---- | ---- | ---- | ---- | ---- | 
-|  1  |  趣味ID  |  id |  int  |  ×  |    |    | 
+|  1  |  趣味ID  |  id |  bigint  |  ×  |    |    | 
 |  2  |  コンテンツ  |  content  |  varchar  |  ×  |    |    | 
-|  3  |  プロフィールID  |  profile_id  |  int  |  ×  |    |    | 
+|  3  |  プロフィールID  |  profile_id  |  bigint  |  ×  |    |    | 
 |  4  |  削除日  |  deleted_at  |  timestamp  |  ○  |    |    | 
 |  5  |  作成日  |  created_at  |  timestamp  |  ○  |    |    | 
 |  6  |  更新日  |  updated_at  |  timestamp  |  ○  |    |    | 
@@ -43,9 +43,9 @@
 
 |  #  |  論理名  |  物理名  |  データ型  |  NULL  |  デフォルト値  |  コメント | 
 | ---- | ---- | ---- | ---- | ---- | ---- | ---- | 
-|  1  |  特技ID  |  id  |  int  |  ×  |    |   | 
+|  1  |  特技ID  |  id  |  bigint  |  ×  |    |   | 
 |  2  |  コンテンツ  |  content  |  varchar  | × |    |    | 
-|  3  |  プロフィールID  |  profile_id  |  int  |  ×  |    |    | 
+|  3  |  プロフィールID  |  profile_id  |  bigint  |  ×  |    |    | 
 |  4  |  削除日  |  deleted_at  |  timestamp  |  ○  |    |    | 
 |  5  |  作成日  |  created_at  |  timestamp  |  ○  |    |    | 
 |  6  |  更新日  |  updated_at  |  timestamp  |  ○  |    |    | 
@@ -57,12 +57,12 @@
 
 |  #  |  論理名  |  物理名  |  データ型  |  NULL  |  デフォルト値  |  コメント | 
 | ---- | ---- | ---- | ---- | ---- | ---- | ---- | 
-|  1  |  キャリアID  |  id  |  int  |  ×  |    |   | 
+|  1  |  キャリアID  |  id  |  bigint  |  ×  |    |   | 
 |  2  |  期間始まり  |  date_from  |  datetime  | × |    |    | 
 |  3  |  期間終わり  |  date_to  |  datetime  |  ○  |    |    | 
 |  4  |  企業名  |  content  |  varchar  |  ×  |    |    | 
 |  5  |  職種  |  occupation  |  varchar  |  ○  |    |    | 
-|  6  |  プロフィールID  |  profile_id  |  int  |  ×  |    |    | 
+|  6  |  プロフィールID  |  profile_id  |  bigint  |  ×  |    |    | 
 |  7  |  削除日  |  deleted_at  |  timestamp  |  ○  |    |    | 
 |  8  |  作成日  |  created_at  |  timestamp  |  ○  |    |    | 
 |  9  |  更新日  |  updated_at  |  timestamp  |  ○  |    |    | 
@@ -75,9 +75,9 @@
 
 |  #  |  論理名  |  物理名  |  データ型  |  NULL  |  デフォルト値  |  コメント | 
 | ---- | ---- | ---- | ---- | ---- | ---- | ---- | 
-|  1  |  自己PRID  |  id  |  int  |  ×  |    |    | 
+|  1  |  自己PRID  |  id  |  bigint  |  ×  |    |    | 
 |  2  |  コンテンツ  |  content  |  text  |  ×  |    |    | 
-|  3  |  プロフィールID  |  profile_id  |  int  |  ×  |    |    | 
+|  3  |  プロフィールID  |  profile_id  |  bigint  |  ×  |    |    | 
 |  4  |  削除日  |  deleted_at  |  timestamp  |  ○  |    |    | 
 |  5  |  作成日  |  created_at  |  timestamp  |  ○  |    |    | 
 |  6  |  更新日  |  updated_at  |  timestamp  |  ○  |    |    | 
