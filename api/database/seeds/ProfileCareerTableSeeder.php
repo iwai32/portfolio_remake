@@ -16,7 +16,7 @@ class ProfileCareerTableSeeder extends Seeder
         DB::table('profile_career')->truncate();
         DB::table('profile_career')->insert([
           [
-            'date_from' => Carbon::create(2020,3),
+            'date_from' => Carbon::create(2020,3,10),
             'date_to' => null,
             'content' => '株式会社ARS',
             'occupation' => 'システムエンジニア',

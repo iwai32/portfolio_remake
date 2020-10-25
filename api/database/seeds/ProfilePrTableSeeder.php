@@ -16,7 +16,7 @@ class ProfilePrTableSeeder extends Seeder
     DB::table('profile_pr')->truncate();
     DB::table('profile_pr')->insert([
       [
-        'content' => '自分が得意なこと、好きなことを仕事にしたいと思い職業適正検査を行い,Webコーダーやプログラマーに向いてると知り、職業訓練校を受講。',
+        'content' => '自分が得意なこと、好きなことを仕事にしたいと思い,Webコーダーやプログラマーに興味を持ち、職業訓練校を受講。',
         'profile_id' => 1,
         'created_at' => Carbon::now(),
         'updated_at' => Carbon::now(),
