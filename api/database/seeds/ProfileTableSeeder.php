@@ -13,8 +13,8 @@ class ProfileTableSeeder extends Seeder
      */
     public function run()
     {
-      DB::table('profile')->truncate();
-      DB::table('profile')->insert([
+      DB::table('profiles')->truncate();
+      DB::table('profiles')->insert([
         'name' => '岩井康平',
         'birth_day' => Carbon::create(1997,3,2),
         'one_thing' => '好きな食べ物はステーキです！',

@@ -13,8 +13,8 @@ class ProfileSpecialHobbyTableSeeder extends Seeder
    */
   public function run()
   {
-    DB::table('profile_special_hobby')->truncate();
-    DB::table('profile_special_hobby')->insert([
+    DB::table('profile_special_hobbies')->truncate();
+    DB::table('profile_special_hobbies')->insert([
       [
         'content' => '映画鑑賞',
         'profile_id' => 1,

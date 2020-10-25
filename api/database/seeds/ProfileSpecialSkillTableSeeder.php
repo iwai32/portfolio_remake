@@ -13,8 +13,8 @@ class ProfileSpecialSkillTableSeeder extends Seeder
    */
   public function run()
   {
-    DB::table('profile_special_skill')->truncate();
-    DB::table('profile_special_skill')->insert([
+    DB::table('profile_special_skills')->truncate();
+    DB::table('profile_special_skills')->insert([
       'content' => 'サッカー',
       'profile_id' => 1,
       'created_at' => Carbon::now(),

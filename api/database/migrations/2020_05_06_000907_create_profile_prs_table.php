@@ -16,7 +16,7 @@ class CreateProfilePrsTable extends Migration
         Schema::create('profile_prs', function (Blueprint $table) {
             $table->id();
             $table->string('content')->comment('PR');
-            $table->integer('profile_id')->unsigned();
+            $table->bigInteger('profile_id')->unsigned();
             $table->foreign('profile_id')->references('id')->on('profiles');
             $table->softDeletes();
             $table->timestamps();

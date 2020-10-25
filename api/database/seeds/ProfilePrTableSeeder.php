@@ -13,8 +13,8 @@ class ProfilePrTableSeeder extends Seeder
    */
   public function run()
   {
-    DB::table('profile_pr')->truncate();
-    DB::table('profile_pr')->insert([
+    DB::table('profile_prs')->truncate();
+    DB::table('profile_prs')->insert([
       [
         'content' => '自分が得意なこと、好きなことを仕事にしたいと思い,Webコーダーやプログラマーに興味を持ち、職業訓練校を受講。',
         'profile_id' => 1,

@@ -13,8 +13,8 @@ class ProfileCareerTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('profile_career')->truncate();
-        DB::table('profile_career')->insert([
+        DB::table('profile_careers')->truncate();
+        DB::table('profile_careers')->insert([
           [
             'date_from' => Carbon::create(2020,3,10),
             'date_to' => null,

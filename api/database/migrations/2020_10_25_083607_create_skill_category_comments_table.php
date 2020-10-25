@@ -16,7 +16,7 @@ class CreateSkillCategoryCommentsTable extends Migration
         Schema::create('skill_category_comments', function (Blueprint $table) {
             $table->id();
             $table->string('comment', 255)->comment('コメント');
-            $table->integer('category_id')->unsigned();
+            $table->bigInteger('category_id')->unsigned();
             $table->foreign('category_id')->references('id')->on('skill_categories');
             $table->softDeletes();
             $table->timestamps();
