@@ -6,5 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProfilePr extends Model
 {
-  protected $table = 'profile_pr';
+  use SoftDeletes;
+  
+  protected $table = 'profile_prs';
 }

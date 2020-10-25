@@ -15,6 +15,7 @@ class CreateSkillCategoryCommentsTable extends Migration
     {
         Schema::create('skill_category_comments', function (Blueprint $table) {
             $table->id();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

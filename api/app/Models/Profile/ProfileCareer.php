@@ -6,5 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProfileCareer extends Model
 {
-  protected $table = 'profile_career';
+  use SoftDeletes;
+
+  protected $table = 'profile_careers';
 }

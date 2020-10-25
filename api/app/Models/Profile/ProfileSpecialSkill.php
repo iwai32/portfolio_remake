@@ -6,5 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProfileSpecialSkill extends Model
 {
-  protected $table = 'profile_special_skill';
+  use SoftDeletes;
+  
+  protected $table = 'profile_special_skills';
 }

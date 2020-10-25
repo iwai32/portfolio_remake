@@ -13,11 +13,12 @@ class CreateProfilePrsTable extends Migration
      */
     public function up()
     {
-        Schema::create('profile_pr', function (Blueprint $table) {
+        Schema::create('profile_prs', function (Blueprint $table) {
             $table->id();
             $table->string('content')->comment('PR');
             $table->bigInteger('profile_id')->unsigned();
-            $table->foreign('profile_id')->references('id')->on('profile');
+            $table->foreign('profile_id')->references('id')->on('profiles');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class CreateProfilePrsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('profile_pr');
+        Schema::dropIfExists('profile_prs');
     }
 }
