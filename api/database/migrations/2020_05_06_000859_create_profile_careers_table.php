@@ -19,7 +19,7 @@ class CreateProfileCareersTable extends Migration
             $table->date('date_to')->nullable()->comment('期間終わり');
             $table->string('content', 100)->comment('企業名');
             $table->string('occupation', 100)->nullable()->comment('職種');
-            $table->bigInteger('profile_id')->unsigned();
+            $table->integer('profile_id')->unsigned();
             $table->foreign('profile_id')->references('id')->on('profiles');
             $table->softDeletes();
             $table->timestamps();

@@ -15,6 +15,7 @@ class CreateSkillCategoriesTable extends Migration
     {
         Schema::create('skill_categories', function (Blueprint $table) {
             $table->id();
+            $table->string('skill_icon_img', 255)->nullable()->default('no_skill_icon.img')->comment('アイコン画像');
             $table->softDeletes();
             $table->timestamps();
         });

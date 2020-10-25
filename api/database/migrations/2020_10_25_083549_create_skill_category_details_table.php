@@ -15,6 +15,9 @@ class CreateSkillCategoryDetailsTable extends Migration
     {
         Schema::create('skill_category_details', function (Blueprint $table) {
             $table->id();
+            $table->string('message', 255)->comment('メッセージ');
+            $table->integer('category_id')->unsigned();
+            $table->foreign('category_id')->references('id')->on('skill_categories');
             $table->softDeletes();
             $table->timestamps();
         });

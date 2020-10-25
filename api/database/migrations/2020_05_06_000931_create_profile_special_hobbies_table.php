@@ -16,7 +16,7 @@ class CreateProfileSpecialHobbiesTable extends Migration
         Schema::create('profile_special_hobbies', function (Blueprint $table) {
             $table->id();
             $table->string('content', 100)->comment('趣味名');
-            $table->bigInteger('profile_id')->unsigned();
+            $table->integer('profile_id')->unsigned();
             $table->foreign('profile_id')->references('id')->on('profiles');
             $table->softDeletes();
             $table->timestamps();
