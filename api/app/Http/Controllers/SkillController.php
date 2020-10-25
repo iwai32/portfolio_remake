@@ -3,16 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Profile\Profile;
-use App\Http\Resources\profileResource;
+use App\Models\Skill\SkillCategory;
+use App\Http\Resources\skillResource;
 
-class ProfileController extends Controller
+class SkillController extends Controller
 {
-  private $profile;
+  private $skill;
+  const MY_PROFILE_ID = 1;
 
-  public function __construct(Profile $profile)
+  public function __construct(SkillCategory $skillCategory)
   {
-    $this->profile = $profile;
+    $this->skill = $skillCategory;
   }
 
   /**
@@ -22,7 +23,11 @@ class ProfileController extends Controller
    */
   public function index()
   {
-    return profileResource::make($this->profile->with('profilePr', 'specialSkill', 'specialHobby', 'profileCareer')->first());
+    return skillResource::make(
+      $this->skill->where('profile_id', self::MY_PROFILE_ID)
+          ->with('skillCategoryDetail', 'skillCategoryComment')
+          ->get()
+    );
   }
 
   /**

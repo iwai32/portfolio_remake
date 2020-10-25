@@ -20,7 +20,10 @@ class DatabaseSeeder extends Seeder
       ProfileCareerTableSeeder::class,
       ProfilePrTableSeeder::class,
       ProfileSpecialHobbyTableSeeder::class,
-      ProfileSpecialSkillTableSeeder::class
+      ProfileSpecialSkillTableSeeder::class,
+      SkillCategoryTableSeeder::class,
+      SkillCategoryDetailTableSeeder::class,
+      SkillCategoryCommentTableSeeder::class
     ]);
 
     DB::statement('SET FOREIGN_KEY_CHECKS=1;');

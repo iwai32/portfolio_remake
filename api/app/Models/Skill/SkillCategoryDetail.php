@@ -3,10 +3,11 @@
 namespace App\Models\Skill;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class SkillCategoryDetail extends Model
 {
   use SoftDeletes;
   
-  protected $table = 'skll_category_details';
+  protected $table = 'skill_category_details';
 }

@@ -18,4 +18,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/profile', 'ProfileController@getMyProfile');
+Route::get('/profile', 'ProfileController@index');
+Route::get('/skill', 'SkillController@index');
