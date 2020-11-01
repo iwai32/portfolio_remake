@@ -91,7 +91,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .vue-typer .custom.char.typed {
   color: #ffffff;
 }
