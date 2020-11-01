@@ -22,7 +22,10 @@ class ProfileController extends Controller
    */
   public function index()
   {
-    return profileResource::make($this->profile->with('profilePr', 'specialSkill', 'specialHobby', 'profileCareer')->first());
+    return profileResource::make(
+      $this->profile->find(config('const.MY_PROFILE_ID'))
+        ->load('profilePr', 'specialSkill', 'specialHobby', 'profileCareer')
+    );
   }
 
   /**

@@ -8,6 +8,5 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class SkillCategoryComment extends Model
 {
   use SoftDeletes;
-  
   protected $table = 'skill_category_comments';
 }

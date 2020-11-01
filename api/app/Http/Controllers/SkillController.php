@@ -9,7 +9,6 @@ use App\Http\Resources\skillResource;
 class SkillController extends Controller
 {
   private $skill;
-  const MY_PROFILE_ID = 1;
 
   public function __construct(SkillCategory $skillCategory)
   {
@@ -24,9 +23,9 @@ class SkillController extends Controller
   public function index()
   {
     return skillResource::make(
-      $this->skill->where('profile_id', self::MY_PROFILE_ID)
-          ->with('skillCategoryDetail', 'skillCategoryComment')
-          ->get()
+      $this->skill->where('profile_id', config('const.MY_PROFILE_ID'))
+        ->with('skillCategoryDetail', 'skillCategoryComment')
+        ->get()
     );
   }
 
