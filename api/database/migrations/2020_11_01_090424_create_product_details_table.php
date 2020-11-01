@@ -15,8 +15,8 @@ class CreateProductDetailsTable extends Migration
     {
         Schema::create('product_details', function (Blueprint $table) {
             $table->id();
-            $table->string('definition', 255);
-            $table->string('detail', 255);
+            $table->string('definition', 255)->comment('定義');
+            $table->string('detail', 255)->comment('詳細');
             $table->bigInteger('product_id')->unsigned();
             $table->foreign('product_id')->references('id')->on('products');
             $table->softDeletes();

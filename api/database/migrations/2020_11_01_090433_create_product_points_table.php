@@ -15,8 +15,8 @@ class CreateProductPointsTable extends Migration
     {
         Schema::create('product_points', function (Blueprint $table) {
             $table->id();
-            $table->string('title', 255);
-            $table->string('point', 255);
+            $table->string('title', 255)->comment('title');
+            $table->string('point', 255)->comment('point');
             $table->bigInteger('product_id')->unsigned();
             $table->foreign('product_id')->references('id')->on('products');
             $table->softDeletes();
