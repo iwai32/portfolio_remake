@@ -20,3 +20,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('/profile', 'ProfileController@index');
 Route::get('/skill', 'SkillController@index');
+Route::get('/product', 'ProductController@index');
