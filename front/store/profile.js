@@ -1,5 +1,5 @@
 export const state = () => ({
-  profileData: {}
+  profileData: []
 })
 
 export const mutations = {
@@ -15,7 +15,7 @@ export const getters = {
 }
 
 export const actions = {
-  profileData({commit}, params) {
+  profileData({ commit }) {
     return this.$axios.get('/api/profile')
     .then((res) => {
       commit('SET_PROFILE_DATA', res.data.data)

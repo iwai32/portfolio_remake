@@ -1,5 +1,5 @@
 export const state = () => ({
-  skillData: {}
+  skillData: []
 })
 
 export const mutations = {
@@ -15,7 +15,7 @@ export const getters = {
 }
 
 export const actions = {
-  skillData({commit}, params) {
+  skillData({ commit }) {
     return this.$axios.get('/api/skill')
     .then((res) => {
       commit('SET_SKILL_DATA', res.data.data)
