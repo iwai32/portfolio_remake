@@ -23,7 +23,10 @@ class DatabaseSeeder extends Seeder
       ProfileSpecialSkillTableSeeder::class,
       SkillCategoryTableSeeder::class,
       SkillCategoryDetailTableSeeder::class,
-      SkillCategoryCommentTableSeeder::class
+      SkillCategoryCommentTableSeeder::class,
+      ProductTableSeeder::class,
+      ProductDetailTableSeeder::class,
+      ProductPointTableSeeder::class,
     ]);
 
     DB::statement('SET FOREIGN_KEY_CHECKS=1;');
