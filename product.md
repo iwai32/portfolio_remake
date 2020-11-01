@@ -17,10 +17,11 @@
 |  5  |  プロダクト画像2  |  picture2  |  varchar  |  ○  |  no_product.img  |    | 
 |  6  |  プロダクトURL  |  product_url  |  varchar  |  ○  |    |    |
 |  7  |  リポジトリURL  |  repository_url  |  varchar  |  ○  |    |    | 
-|  8  |  プロダクト詳細  |  about  |  text  |  ○  |    |    | 
-|  9  |  削除日  |  deleted_at  |  timestamp  |  ○  |    |    | 
-|  10  |  作成日  |  created_at  |  timestamp  |  ○  |    |    | 
-|  11  |  更新日  |  updated_at  |  timestamp  |  ○  |    |    | 
+|  8  |  プロダクト詳細  |  about  |  text  |  ○  |    |    |
+|  9  |  プロダクト作成日  |  create_date  |  dateTime  |  ×  |    |    | 
+|  10  |  削除日  |  deleted_at  |  timestamp  |  ○  |    |    | 
+|  11  |  作成日  |  created_at  |  timestamp  |  ○  |    |    | 
+|  12  |  更新日  |  updated_at  |  timestamp  |  ○  |    |    | 
 
 <br>
 <br>
