@@ -1,6 +1,8 @@
 <template>
   <div class="top-container">
-    <nuxt-link to="admin/" class="to-admin-page">admin</nuxt-link>
+    <p class="to-admin-page">
+      <nuxt-link to="admin/" class="link">admin</nuxt-link>
+    </p>
     <h1 class="key">Iwai's Portfolio</h1>
 
     <ul class="top-nav">
