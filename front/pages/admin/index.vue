@@ -26,23 +26,9 @@
               v-model.trim="loginForm.password"
               required
             />
-            <span class="form__group__attention">emailが違います</span>
-          </div>
-        </div>
-        <!--.formgroup-->
-
-        <div class="form__group">
-          <label class="form__group__label" for="password_confirm"
-            ><span>Password(confirm)：</span></label
-          >
-          <div class="form__group__inputs">
-            <input
-              type="password"
-              id="password_confirm"
-              v-model.trim="loginForm.password_confirm"
-              required
-            />
-            <span class="form__group__attention">emailが違います</span>
+            <span class="form__group__attention">{{
+              validation.password
+            }}</span>
           </div>
         </div>
         <!--.formgroup-->
@@ -53,55 +39,80 @@
             value="ログイン"
             class="form__buttons__btn"
             @click="login()"
+            :disabled="!isSuccess"
           />
         </div>
       </div>
     </div>
     <!--.c-container-->
-    {{ loginForm }}
   </section>
 </template>
 
 <script>
-import Validation from "~/const/validation"
+import Validation from "~/const/validation";
 export default {
   data() {
     return {
       loginForm: {
         email: "",
         password: "",
-        password_confirm: "",
       },
       validation: {
         email: "",
         password: "",
-        password_confirm: ""
-      }
+      },
     };
   },
   watch: {
-    'loginForm.email': function(val) {
-      this.validEmail(val)
-    }
+    "loginForm.email": function (val) {
+      this.validEmail(val);
+    },
+    "loginForm.password": function (val) {
+      this.validPassword(val);
+    },
+  },
+  computed: {
+    isSuccess() {
+      let emailOk =
+        this.loginForm.email.length !== 0 && this.validation.email.length === 0;
+      let passwordOk =
+        this.loginForm.password.length !== 0 &&
+        this.validation.password.length === 0;
+      if (emailOk && passwordOk) {
+        return true;
+      }
+      return false;
+    },
   },
   methods: {
     validEmail(val) {
-      console.log(Validation.TEST)
-      if (val == "") {
-        this.validation.email = "emailが未入力です。"
+      const reg = new RegExp(
+        "^[A-Za-z0-9]{1}[A-Za-z0-9_.-]*@{1}[A-Za-z0-9_.-]{1,}.[A-Za-z0-9]{1,}$"
+      );
+
+      if (val.length === 0) {
+        this.validation.email = Validation.MSG_REQUIRED;
+      } else if (!reg.test(val)) {
+        this.validation.email = Validation.EMAIL_TYPE;
+      } else {
+        this.validation.email = "";
+      }
+    },
+    validPassword(val) {
+      if (val.length === 0) {
+        this.validation.password = Validation.MSG_REQUIRED;
+      } else if (val.length < 6) {
+        this.validation.password = Validation.PASSWORD_MIN;
+      } else {
+        this.validation.password = "";
       }
     },
     login() {
-      if (this.loginForm.email == "") {
-        alert("未入力");
-      } else {
-        alert("入力あり");
-      }
-
-      //未入力チェック
-      //email形式チェック
-      //passwordとconfirmの一致確認
-      console.log(this.loginForm);
+      try {
+        this.$auth.loginWith("local", {
+          data: this.loginForm
+        });
+      } catch (error) {}
     },
   },
 };
