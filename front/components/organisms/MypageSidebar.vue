@@ -13,25 +13,9 @@
       />
     </p>
 
-    <ul class="profile-navs">
-      <li
-        class="profile-navs__list"
-        :class="{ active: this.$route.name === 'profile' }"
-        @click="toProfile()"
-      >
-        <i class="fa fa-arrow-right" aria-hidden="true"></i>
-        <span>Profile</span>
-      </li>
-      <li
-        class="profile-navs__list"
-        :class="{ active: this.$route.name === 'skill' }"
-        @click="toSkill()"
-      >
-        <i class="fa fa-arrow-right" aria-hidden="true"></i>
-        <span>Skill</span>
-      </li>
-    </ul>
-    <!--profile-navs-->
+    <PageNavBtns
+      :PageNavBtnList="PageNavBtnList"
+    />
 
     <div class="profile-typ">
       <p class="profile-typ__txt">
@@ -50,12 +34,16 @@
 </template>
 
 <script>
+import PageNavBtns from "~/components/molecules/PageNavBtns"
 const MY_MESSAGES = [
   "技術書を読むのが好きで気づいたらネットでポチってます。",
   "好きな食べ物はステーキです！"
 ]
 export default {
   name: "MypageSidebar",
+  components: {
+    PageNavBtns
+  },
   props: {
     typTxt: {
       type: String,
@@ -74,18 +62,24 @@ export default {
     return {
       typTxtValue: this.typTxt,
       talk: true,
+      PageNavBtnList: [
+        {
+          title: "Profile",
+          url: "/profile",
+          activeRoute: "profile"
+        },
+        {
+          title: "Skill",
+          url: "/skill",
+          activeRoute: "skill"
+        }
+      ]
     };
   },
   methods: {
     meMessage() {
       let randomNum = Math.floor(Math.random() * Math.floor(2));
       this.typTxtValue = MY_MESSAGES[randomNum]
-    },
-    toProfile() {
-      this.$router.push("/profile");
-    },
-    toSkill() {
-      this.$router.push("/skill");
     },
   },
 };

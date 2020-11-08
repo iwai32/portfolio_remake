@@ -1,0 +1,88 @@
+/*共通UI*/
+.page-nav-btns {
+  margin-bottom: 40px;
+
+  &__list {
+    border: 4px solid #fff;
+    border-radius: 10px;
+    box-shadow: 8px 8px #777;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 10px;
+    transition: 0.2s;
+
+    .fa-arrow-right {
+      display: none;
+      font-size: 2.8rem;
+    }
+
+    .navs-text {
+      color: #ffffff;
+      display: block;
+    }
+
+    span {
+      font-size: 2.8rem;
+      letter-spacing: 0.25rem;
+    }
+
+    &.active {
+      .fa-arrow-right {
+        display: block;
+      }
+    }
+
+    &:hover {
+      box-shadow: none;
+      opacity: 0.6;
+
+      .fa-arrow-right {
+        display: block;
+      }
+    }
+
+  }
+
+  &.admin &__list {
+    margin-bottom: 30px;
+  }
+
+  @include sp {
+    margin-bottom: 0;
+    width: 30%;
+
+    &__list {
+      border: 4px solid #fff {
+        radius: 20px;
+      }
+
+      box-shadow: none;
+      margin-bottom: 0;
+      padding: 8px 6.7%;
+
+      .fa-arrow-right {
+        display: none;
+        font-size: 1.4rem;
+      }
+
+      span {
+        font-size: 1.6rem;
+        letter-spacing: 0.25rem;
+      }
+    }
+
+    &__list+&__list {
+      margin: 0;
+    }
+
+    &.admin {
+      width: 100%;
+    }
+
+    &.admin &__list {
+      margin-bottom: 10px;
+    }
+  }
+}

@@ -1,4 +1,12 @@
-@import "reset", "mixin", "top", "header", "profile", "works", "admin";
+@import "reset",
+"mixin",
+"common",
+"top",
+"header",
+"profile",
+"works",
+"admin"
+;
 
 html {
   font-size: 62.5%;
@@ -11,16 +19,20 @@ body {
 }
 
 /*トランジション*/
-.page-enter-active, .page-leave-active {
+.page-enter-active,
+.page-leave-active {
   transition: opacity .4s
 }
-.page-enter, .page-leave-active {
+
+.page-enter,
+.page-leave-active {
   opacity: 0
 }
 
 .sp-on {
   display: none;
-  @include sp{
+
+  @include sp {
     display: block;
   }
 }

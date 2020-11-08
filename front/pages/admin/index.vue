@@ -108,11 +108,11 @@ export default {
       }
     },
     login() {
-      try {
         this.$auth.loginWith("local", {
           data: this.loginForm
+        }).then((res) => {
+          this.$router.push('/admin/nav')
         });
-      } catch (error) {}
     },
   },
 };
