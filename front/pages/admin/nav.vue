@@ -2,7 +2,7 @@
   <section class="admin-con">
     <div>
       <h2 class="admin-con__title">Edit</h2>
-      <PageNavBtns :PageNavBtnList="PageNavBtnList" :PageClass="'admin'"/>
+      <PageNavBtns :PageNavBtnList="PageNavBtnList" :PageClass="'admin'" />
     </div>
   </section>
 </template>

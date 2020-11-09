@@ -86,3 +86,117 @@
     }
   }
 }
+
+.buttons {
+  padding: 10px 0;
+  .button {
+    background: #555;
+    border-radius: 4px;
+    border: 2px solid #fff;
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 10px 20px;
+    transition: .4s;
+    letter-spacing: .25em;
+    &:hover {
+      background: #fff;
+      color: #555;
+      transition: .4s;
+    }
+  }
+}
+
+.edit-button {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/*フォームUI*/
+.form {
+  &__group {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+
+    &__label {
+      display: inline-block;
+      font-size: 2rem;
+      text-align: right;
+      width: 37.2%;
+      margin-bottom: 20px;
+    }
+
+    &__inputs {
+      font-size: 1.6rem;
+      display: flex;
+      flex-wrap: wrap;
+      padding: 2px;
+      width: 62.8%;
+      margin-bottom: 20px;
+      input {
+        width: 100%;
+      }
+    }
+    &__attention {
+      color: #ff3333;
+      font-size: 1.4rem;
+      padding: 4px 2px;
+    }
+
+    @include sp {
+      margin-bottom: 20px;
+
+      &__label {
+        font-size: 1.4rem;
+        margin-bottom: 10px;
+        text-align: start;
+      }
+
+      &__inputs {
+        font-size: 1.4rem;
+      }
+    }
+  }
+
+  &__buttons {
+    display: flex;
+    justify-content: space-evenly;
+    text-align: center;
+    padding: 20px;
+
+    &__btn {
+      box-shadow: 4px 4px #666;
+      border-radius: 10px;
+      cursor: pointer;
+      display: inline-block;
+      font-size: 1.6rem;
+      padding: 8px 40px;
+      transition: .2s;
+
+      &:hover {
+        box-shadow: none;
+      }
+    }
+
+    @include sp {
+      padding: 10px;
+
+      &__btn {
+        box-shadow: none;
+        font-size: 1.4rem;
+        padding: 8px 20px;
+      }
+    }
+  }
+
+  &__txt {
+    font-size: 1.6rem;
+    line-height: 1.5;
+    margin-bottom: 20px;
+
+    @include sp {
+      font-size: 1.4rem;
+    }
+  }
+}

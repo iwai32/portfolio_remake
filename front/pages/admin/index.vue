@@ -51,6 +51,11 @@
 <script>
 import Validation from "~/const/validation";
 export default {
+  middleware({ store, redirect }) {
+    if (store.$auth.loggedIn) {
+      redirect("/admin/nav");
+    }
+  },
   data() {
     return {
       loginForm: {
@@ -108,10 +113,12 @@ export default {
       }
     },
     login() {
-        this.$auth.loginWith("local", {
-          data: this.loginForm
-        }).then((res) => {
-          this.$router.push('/admin/nav')
+      this.$auth
+        .loginWith("local", {
+          data: this.loginForm,
+        })
+        .then((res) => {
+          this.$router.push("/admin/nav");
         });
     },
   },

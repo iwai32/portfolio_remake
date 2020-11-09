@@ -19,6 +19,7 @@ export const actions = {
     return this.$axios.get('/api/profile')
     .then((res) => {
       commit('SET_PROFILE_DATA', res.data.data)
+      return res.data.data
     })
   }
 }
