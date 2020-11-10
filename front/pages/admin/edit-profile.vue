@@ -52,7 +52,11 @@
                     v-model="skill.content"
                 /></span>
               </span>
-              <span v-else>ありません</span>
+              <span
+                class="icon-wrapp"
+                @click="addItem(profileData.special_skill, 'skill')"
+                ><i class="fa fa-plus-circle add-icon" aria-hidden="true"></i
+              ></span>
             </div>
           </div>
           <!--.formgroup-->
@@ -70,7 +74,11 @@
                 >
                   <input type="text" required v-model="hobby.content" /></span
               ></span>
-              <span v-else>ありません</span>
+              <span
+                class="icon-wrapp"
+                @click="addItem(profileData.special_hobby, 'hobby')"
+                ><i class="fa fa-plus-circle add-icon" aria-hidden="true"></i
+              ></span>
             </div>
           </div>
           <!--.formgroup-->
@@ -86,7 +94,7 @@
             <dt class="career__term">
               <div class="form__group">
                 <label class="form__group__label" for="prof-career-from"
-                  >開始：</label
+                  >{{ careerKey + 1 + "." }}&nbsp;開始：</label
                 >
                 <div class="form__group__inputs">
                   <input
@@ -132,6 +140,13 @@
               <!--.formgroup-->
             </dd>
           </dl>
+          <div class="icon-layout">
+            <span
+              class="icon-wrapp"
+              @click="addItem(profileData.profile_career, 'career')"
+              ><i class="fa fa-plus-circle add-icon" aria-hidden="true"></i
+            ></span>
+          </div>
 
           <hr class="under-line" />
           <h3 class="section-title">Pr</h3>
@@ -142,13 +157,21 @@
               :key="prKey"
             >
               <div class="form__group">
-                <div class="form__group__inputs">
+                <span class="pr-num">{{ prKey + 1 + "." }}&nbsp;</span>
+                <div class="pr-inputs form__group__inputs">
                   <input type="text" required v-model="pr.content" />
                 </div>
               </div>
               <!--.formgroup-->
             </li>
           </ul>
+          <div class="icon-layout">
+            <span
+              class="icon-wrapp"
+              @click="addItem(profileData.profile_pr, 'pr')"
+              ><i class="fa fa-plus-circle add-icon" aria-hidden="true"></i
+            ></span>
+          </div>
         </div>
       </div>
       <!--.profile-sec__inner-->
@@ -164,6 +187,7 @@
 
 <script>
 import { mapGetters } from "vuex";
+import ObjectData from "~/const/objectData";
 
 export default {
   //middlewareを定義する
@@ -195,6 +219,20 @@ export default {
   methods: {
     editConfirm() {
       alert("on click");
+    },
+    addItem(item, category) {
+      //定数は同じデータオブジェクトのため、そのままリストレンダリングで使用すると、
+      //他のフィールドも連動して変更されてしまう。複製して別のデータオブジェクトとして作成する。
+      if (category === "skill") {
+        item.push(_.cloneDeep(ObjectData.SKILL_OBJECT));
+      } else if (category === "hobby") {
+        item.push(_.cloneDeep(ObjectData.HOBBY_OBJECT));
+      } else if (category === "pr") {
+        item.push(_.cloneDeep(ObjectData.PR_OBJECT));
+      } else if (category === "career") {
+        item.push(_.cloneDeep(ObjectData.CAREER_OBJECT));
+      }
+
     },
   },
 };

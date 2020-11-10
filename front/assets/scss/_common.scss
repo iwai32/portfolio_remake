@@ -112,6 +112,15 @@
   justify-content: flex-end;
 }
 
+.icon-wrapp {
+  padding: 4px;
+}
+
+.add-icon {
+  cursor: pointer;
+  font-size: 2rem;
+}
+
 /*フォームUI*/
 .form {
   &__group {
