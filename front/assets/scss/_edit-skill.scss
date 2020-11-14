@@ -1,0 +1,322 @@
+.edit-skill-con {
+  margin: 40px auto 0;
+  max-width: 1000px;
+
+  @include sp {
+    display: flex;
+    flex-wrap: wrap;
+
+    &__details {
+      background: #444;
+      position: fixed;
+      bottom: 100px;
+      right: 0;
+      z-index: 1000;
+      width: 50%;
+    }
+  }
+}
+
+.edit-skill-sec {
+  border: 4px solid #fff;
+  border-radius: 10px;
+
+  &__inner {
+    padding: 20px;
+
+    .edit-skill-title {
+      font-size: 3.6rem;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+  }
+
+  @include sp {
+    &__inner {
+      padding: 10px 2.8%;
+
+      .edit-skill-title {
+        font-size: 2.4rem; //4.8
+        margin-bottom: 10px;
+      }
+    }
+  }
+}
+
+.edit-skill-category {
+  display: flex;
+  flex-flow: row wrap;
+  margin-bottom: 30px;
+
+  &__list {
+    &__title {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+    }
+  }
+
+  @include sp {
+    &__list {
+      margin-bottom: 0;
+      width: 100%;
+
+      &__title {
+        font-size: 1.2rem;
+        margin-left: 8%;
+      }
+
+      &--editor {
+        margin-right: 0;
+      }
+    }
+  }
+}
+
+.edit-skill-items {
+  display: flex;
+  flex-wrap: wrap;
+
+  &__list {
+    border: 2px solid #fff;
+    border-radius: 6px;
+    box-shadow: 6px 6px #666;
+    cursor: pointer;
+    font-style: italic;
+    letter-spacing: 0.2em;
+    margin: 0 3% 20px 0;
+    padding: 6px;
+    text-align: center;
+    text-shadow: -1px -1px 1px #ffffff, 1px 1px #000000;
+    transition: 0.2s;
+    width: 80px;
+
+    &:hover {
+      box-shadow: none;
+      color: #666;
+    }
+
+    &__title {
+      font-size: 1.6rem;
+    }
+
+    &__logo {
+      margin: 10px auto;
+      width: 60px;
+      height: 28px;
+    }
+
+    &__level {
+      font-size: 1.6rem;
+    }
+  }
+
+  &__list.active {
+    box-shadow: none;
+    color: #666;
+    opacity: 0.6;
+  }
+
+  @include sp {
+    display: flex;
+    flex-wrap: wrap;
+
+    &__list {
+      letter-spacing: 0.05em;
+      margin: 0 6% 10px;
+      padding: 6px 3px;
+      text-shadow: none;
+      width: 35%;
+
+      &:nth-child(even) {
+        margin-right: 0;
+      }
+
+      &__title {
+        font-size: 1.2rem;
+      }
+
+      &__logo {
+        margin: 5px auto;
+        width: 60px;
+        height: 20px;
+      }
+
+      &__level {
+        font-size: 1rem;
+      }
+    }
+  }
+}
+
+.edit-skill-status-wrapp {
+  display: flex;
+  justify-content: space-between;
+  flex-flow: row wrap;
+}
+
+.edit-skill-status {
+  border: 4px solid #fff;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  width: 60%;
+
+  &__title {
+    margin-bottom: 20px;
+  }
+
+  &__nominal {
+    font-size: 1.4rem;
+    padding: 4px 0;
+  }
+
+  .detail-delete-button {
+    top: 24%;
+    right: 1%;
+  }
+
+  @include sp {
+    margin: 0;
+    padding: 4px 4%;
+    height: 142px;
+    min-height: 142px;
+    height: auto;
+
+    &__title {
+      font-size: 2.2rem;
+      margin-bottom: 10px;
+      text-align: center;
+
+      &__logo {
+        width: 22px;
+        height: 22px;
+        margin-left: 10px;
+      }
+    }
+
+    &__point {
+      display: flex;
+      flex-direction: center;
+      font-size: 1.3rem;
+      margin: 0 0 5px 2.8%;
+      position: relative;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      &::before {
+        position: absolute;
+        top: 6px;
+        left: -8px;
+        width: 6px;
+        height: 6px;
+      }
+    }
+  }
+}
+
+.edit-skill-uploads {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  width: 35%;
+
+  &__area {
+    border: 4px solid #fff;
+    border-radius: 10px;
+    padding: 20px;
+    width: 100%;
+  }
+
+  &__logo {
+    height: 100px;
+    text-align: center;
+    margin: 20px 0;
+    img {
+      max-height: 100%;
+    }
+  }
+}
+
+.edit-skill-comment {
+  border: 4px solid #fff;
+  border-radius: 10px;
+  padding: 20px;
+  width: 100%;
+}
+
+/*入力フィールドに関するスタイル*/
+.edit-skill-con {
+  .form__group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0;
+
+    &.comment {
+      margin-bottom: 0;
+    }
+
+    &__label {
+      font-size: 1.6rem;
+      margin-right: 10px;
+      margin-bottom: 0;
+      width: auto;
+    }
+
+    &__inputs {
+      font-size: 1.6rem;
+      margin-bottom: 0;
+      width: 100%;
+
+      .input-group {
+        display: flex;
+        flex-wrap: wrap;
+
+        .input {
+          margin-right: 8px;
+          margin-bottom: 4px;
+
+          &:last-of-type {
+            margin-right: 0;
+          }
+        }
+      }
+
+      input {
+        padding: 6px 4px;
+      }
+    }
+
+    &__attention {
+      color: #ff3333;
+      font-size: 1.4rem;
+      padding: 4px 2px;
+    }
+
+    @include sp {
+      flex-wrap: wrap;
+      margin-bottom: 0;
+
+      &__label {
+        font-size: 1.4rem;
+        width: 30%;
+        margin-bottom: 10px;
+      }
+
+      &__inputs {
+        font-size: 1.4rem;
+
+        .input-group {
+          flex-wrap: wrap;
+          width: 100%;
+
+          .input {
+            margin-right: 0;
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}

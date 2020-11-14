@@ -51,18 +51,17 @@
                     required
                     v-model="skill.content"
                   />
-                  <i
-                    class="fa fa-times-circle-o delete-button skill-delete-button"
-                    aria-hidden="true"
-                    @click="deleteItem(profileData.special_skill, skillKey)"
-                  ></i>
+                  <BaseBtnDelete
+                    :deleteData="profileData.special_skill"
+                    :dataKey="skillKey"
+                    :customClassName="'skill-delete-button'"
+                  />
                 </span>
               </span>
-              <span
-                class="icon-wrapp"
-                @click="addItem(profileData.special_skill, 'skill')"
-                ><i class="fa fa-plus-circle add-icon" aria-hidden="true"></i
-              ></span>
+              <BaseBtnAdd
+                :addData="profileData.special_skill"
+                :categoryName="'sp-skill'"
+              />
             </div>
           </div>
           <!--.formgroup-->
@@ -79,17 +78,16 @@
                   class="input del-point"
                 >
                   <input type="text" required v-model="hobby.content" />
-                  <i
-                    class="fa fa-times-circle-o delete-button hobby-delete-button"
-                    aria-hidden="true"
-                    @click="deleteItem(profileData.special_hobby, hobbyKey)"
-                  ></i> </span
+                  <BaseBtnDelete
+                    :deleteData="profileData.special_hobby"
+                    :dataKey="hobbyKey"
+                    :customClassName="'hobby-delete-button'"
+                  /> </span
               ></span>
-              <span
-                class="icon-wrapp"
-                @click="addItem(profileData.special_hobby, 'hobby')"
-                ><i class="fa fa-plus-circle add-icon" aria-hidden="true"></i
-              ></span>
+              <BaseBtnAdd
+                :addData="profileData.special_hobby"
+                :categoryName="'hobby'"
+              />
             </div>
           </div>
           <!--.formgroup-->
@@ -132,11 +130,11 @@
                 </div>
               </div>
               <!--.formgroup-->
-              <i
-                class="fa fa-window-close delete-button career-delete-button"
-                aria-hidden="true"
-                @click="deleteItem(profileData.profile_career,  careerKey)"
-              ></i>
+              <BaseBtnDelete
+                :deleteData="profileData.profile_career"
+                :dataKey="careerKey"
+                :customClassName="'career-delete-button'"
+              />
             </dt>
             <dd class="career__desc">
               <div class="form__group">
@@ -157,11 +155,10 @@
             </dd>
           </dl>
           <div class="icon-layout">
-            <span
-              class="icon-wrapp"
-              @click="addItem(profileData.profile_career, 'career')"
-              ><i class="fa fa-plus-circle add-icon" aria-hidden="true"></i
-            ></span>
+            <BaseBtnAdd
+              :addData="profileData.profile_career"
+              :categoryName="'career'"
+            />
           </div>
 
           <hr class="under-line" />
@@ -176,22 +173,21 @@
                 <span class="pr-num">{{ prKey + 1 + "." }}&nbsp;</span>
                 <div class="pr-inputs form__group__inputs del-point">
                   <input type="text" required v-model="pr.content" />
-                  <i
-                    class="fa fa-times-circle-o delete-button pr-delete-button"
-                    aria-hidden="true"
-                    @click="deleteItem(profileData.profile_pr, prKey)"
-                  ></i>
+                  <BaseBtnDelete
+                    :deleteData="profileData.profile_pr"
+                    :dataKey="prKey"
+                    :customClassName="'pr-delete-button'"
+                  />
                 </div>
               </div>
               <!--.formgroup-->
             </li>
           </ul>
           <div class="icon-layout">
-            <span
-              class="icon-wrapp"
-              @click="addItem(profileData.profile_pr, 'pr')"
-              ><i class="fa fa-plus-circle add-icon" aria-hidden="true"></i
-            ></span>
+            <BaseBtnAdd
+              :addData="profileData.profile_pr"
+              :categoryName="'pr'"
+            />
           </div>
         </div>
       </div>
@@ -199,7 +195,7 @@
     </section>
     <!--.profile-sec #profileArea-->
     <div class="buttons edit-button">
-      <button class="button" @click.stop="editConfirm()">Edit</button>
+      <TheBtnEdit />
     </div>
   </div>
   <!--.profile-con-->
@@ -208,18 +204,22 @@
 
 <script>
 import { mapGetters } from "vuex";
-import ObjectData from "~/const/objectData";
+import BaseBtnAdd from "~/components/atoms/BaseBtnAdd";
+import BaseBtnDelete from "~/components/atoms/BaseBtnDelete";
+import TheBtnEdit from "~/components/atoms/TheBtnEdit";
 
 export default {
   //middlewareを定義する
   layout: "mypage",
+  components: {
+    BaseBtnAdd,
+    BaseBtnDelete,
+    TheBtnEdit,
+  },
   async asyncData({ store }) {
     return store.dispatch("profile/profileData").then((res) => {
       return { profileData: _.cloneDeep(res) };
     });
-  },
-  data() {
-    return {};
   },
   computed: {
     careerDateFrom(date_from) {
@@ -236,29 +236,6 @@ export default {
           : "";
       };
     },
-  },
-  methods: {
-    editConfirm() {
-      alert("on click");
-    },
-    addItem(item, category) {
-      //定数は同じデータオブジェクトのため、そのままリストレンダリングで使用すると、
-      //他のフィールドも連動して変更されてしまう。複製して別のデータオブジェクトとして作成する。
-      let addItem = null;
-      if (category === "skill") {
-        addItem = _.cloneDeep(ObjectData.SKILL_OBJECT);
-      } else if (category === "hobby") {
-        addItem = _.cloneDeep(ObjectData.HOBBY_OBJECT);
-      } else if (category === "pr") {
-        addItem = _.cloneDeep(ObjectData.PR_OBJECT);
-      } else if (category === "career") {
-        addItem = _.cloneDeep(ObjectData.CAREER_OBJECT);
-      }
-      item.push(addItem);
-    },
-    deleteItem(items, key) {
-      items.splice(key, 1)
-    }
   },
 };
 </script>
