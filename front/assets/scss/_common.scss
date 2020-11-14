@@ -112,6 +112,18 @@
   justify-content: flex-end;
 }
 
+.del-point {
+  position: relative;
+}
+
+.delete-button {
+  color: #222;
+  cursor: pointer;
+  font-size: 20px;
+  position: absolute;
+  z-index: 100;
+}
+
 .icon-wrapp {
   padding: 4px;
 }

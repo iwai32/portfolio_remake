@@ -44,13 +44,19 @@
                 <span
                   v-for="(skill, skillKey) in profileData.special_skill"
                   :key="skillKey"
-                  class="input"
+                  class="input del-point"
                   ><input
                     type="text"
                     id="prof-sp-skill"
                     required
                     v-model="skill.content"
-                /></span>
+                  />
+                  <i
+                    class="fa fa-times-circle-o delete-button skill-delete-button"
+                    aria-hidden="true"
+                    @click="deleteItem(profileData.special_skill, skillKey)"
+                  ></i>
+                </span>
               </span>
               <span
                 class="icon-wrapp"
@@ -70,9 +76,14 @@
                 ><span
                   v-for="(hobby, hobbyKey) in profileData.special_hobby"
                   :key="hobbyKey"
-                  class="input"
+                  class="input del-point"
                 >
-                  <input type="text" required v-model="hobby.content" /></span
+                  <input type="text" required v-model="hobby.content" />
+                  <i
+                    class="fa fa-times-circle-o delete-button hobby-delete-button"
+                    aria-hidden="true"
+                    @click="deleteItem(profileData.special_hobby, hobbyKey)"
+                  ></i> </span
               ></span>
               <span
                 class="icon-wrapp"
@@ -91,7 +102,7 @@
             v-for="(career, careerKey) in profileData.profile_career"
             :key="careerKey"
           >
-            <dt class="career__term">
+            <dt class="career__term del-point">
               <div class="form__group">
                 <label class="form__group__label" for="prof-career-from"
                   >{{ careerKey + 1 + "." }}&nbsp;開始：</label
@@ -121,6 +132,11 @@
                 </div>
               </div>
               <!--.formgroup-->
+              <i
+                class="fa fa-window-close delete-button career-delete-button"
+                aria-hidden="true"
+                @click="deleteItem(profileData.profile_career,  careerKey)"
+              ></i>
             </dt>
             <dd class="career__desc">
               <div class="form__group">
@@ -158,8 +174,13 @@
             >
               <div class="form__group">
                 <span class="pr-num">{{ prKey + 1 + "." }}&nbsp;</span>
-                <div class="pr-inputs form__group__inputs">
+                <div class="pr-inputs form__group__inputs del-point">
                   <input type="text" required v-model="pr.content" />
+                  <i
+                    class="fa fa-times-circle-o delete-button pr-delete-button"
+                    aria-hidden="true"
+                    @click="deleteItem(profileData.profile_pr, prKey)"
+                  ></i>
                 </div>
               </div>
               <!--.formgroup-->
@@ -223,17 +244,21 @@ export default {
     addItem(item, category) {
       //定数は同じデータオブジェクトのため、そのままリストレンダリングで使用すると、
       //他のフィールドも連動して変更されてしまう。複製して別のデータオブジェクトとして作成する。
+      let addItem = null;
       if (category === "skill") {
-        item.push(_.cloneDeep(ObjectData.SKILL_OBJECT));
+        addItem = _.cloneDeep(ObjectData.SKILL_OBJECT);
       } else if (category === "hobby") {
-        item.push(_.cloneDeep(ObjectData.HOBBY_OBJECT));
+        addItem = _.cloneDeep(ObjectData.HOBBY_OBJECT);
       } else if (category === "pr") {
-        item.push(_.cloneDeep(ObjectData.PR_OBJECT));
+        addItem = _.cloneDeep(ObjectData.PR_OBJECT);
       } else if (category === "career") {
-        item.push(_.cloneDeep(ObjectData.CAREER_OBJECT));
+        addItem = _.cloneDeep(ObjectData.CAREER_OBJECT);
       }
-
+      item.push(addItem);
     },
+    deleteItem(items, key) {
+      items.splice(key, 1)
+    }
   },
 };
 </script>
