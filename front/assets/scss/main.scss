@@ -38,3 +38,9 @@ body {
     display: block;
   }
 }
+
+.pc-on {
+  @include sp {
+    display: none;
+  }
+}

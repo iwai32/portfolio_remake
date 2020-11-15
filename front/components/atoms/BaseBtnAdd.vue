@@ -5,36 +5,44 @@
 </template>
 
 <script>
-import ObjectData from "~/const/objectData";
-
 export default {
   props: {
     addData: {
       type: Array,
-      default: []
+      default: [],
     },
     categoryName: {
       type: String,
-      default: ""
-    }
+      default: "",
+    },
   },
   methods: {
     addItem(item, category) {
-      //定数は同じデータオブジェクトのため、そのままリストレンダリングで使用すると、
-      //他のフィールドも連動して変更されてしまう。複製して別のデータオブジェクトとして作成する。
-      let addItem = null;
-      if (category === "sp-skill") {
-        addItem = _.cloneDeep(ObjectData.SP_SKILL_OBJECT);
-      } else if (category === "hobby") {
-        addItem = _.cloneDeep(ObjectData.HOBBY_OBJECT);
-      } else if (category === "pr") {
-        addItem = _.cloneDeep(ObjectData.PR_OBJECT);
-      } else if (category === "career") {
-        addItem = _.cloneDeep(ObjectData.CAREER_OBJECT);
-      } else if (category === "skill") {
-        addItem = _.cloneDeep(ObjectData.SKILL_OBJECT);
-      }
-      item.push(addItem);
+      let copyObject = _.cloneDeep(item[0]);
+      const VM = this;
+
+      _.forEach(copyObject, function (value, key) {
+        if (typeof copyObject[key] === "object") {
+          VM.cloneObject(copyObject[key]);
+        } else {
+          copyObject[key] = "";
+        }
+      });
+
+      item.push(copyObject);
+    },
+    //objectがなくなるまで回し、プロパティを空にする
+    cloneObject(item) {
+      const VM = this;
+
+      _.forEach(item, function (value, key) {
+        if (typeof item[key] === "object") {
+          VM.cloneObject(item[key]);
+        } else {
+          item[key] = "";
+        }
+      });
+
     },
   },
 };

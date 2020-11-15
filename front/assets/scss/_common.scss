@@ -133,6 +133,25 @@
   font-size: 2rem;
 }
 
+.input-hidden {
+  display: none;
+}
+
+.file-upload-button {
+  border: 2px solid #fff;
+  border-radius: 4px;
+  font-size: 1.6rem;
+  padding: 4px;
+  transition: .4s;
+  &:hover {
+    background: #fff;
+    color: #555;
+    transition: .4s;
+  }
+}
+
+
+
 /*フォームUI*/
 .form {
   &__group {

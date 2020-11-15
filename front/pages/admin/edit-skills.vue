@@ -2,7 +2,7 @@
   <div class="edit-skill-con">
     <section class="edit-skill-sec">
       <div class="edit-skill-sec__inner">
-        <h2 class="edit-skill-title">Skill</h2>
+        <h2 class="edit-skill-title">Edit-Skill</h2>
         <div class="edit-skill-con__category">
           <ul class="edit-skill-category">
             <li class="edit-skill-category__list">
@@ -12,19 +12,31 @@
                 <li
                   v-for="(skill, skillKey) in skillData"
                   :key="skillKey"
-                  class="edit-skill-items__list"
-                  @click="change(skill)"
-                  :class="{ active: isActive === skill.name }"
+                  class="edit-skill-items__list del-point"
+                  @click="change(skill, skillKey)"
+                  :class="{ active: isActive === skillKey }"
                 >
                   <h4 class="edit-skill-items__list__title">
                     {{ skill.name }}
                   </h4>
                   <img
+                    v-if="!_.isEmpty(skill.upload_image)"
+                    :src="skill.upload_image"
+                    :alt="skill.name"
+                  />
+                  <img
+                    v-else
                     class="edit-skill-items__list__logo"
                     :src="skillUrl(skill)"
                     :alt="skill.name"
                   />
+                  <BaseBtnDelete
+                    :deleteData="skillData"
+                    :dataKey="skillKey"
+                    :customClassName="'skill-items-delete-button'"
+                  />
                 </li>
+                <BaseBtnAdd :addData="skillData" :categoryName="'skill'" />
               </ul>
             </li>
           </ul>
@@ -33,12 +45,12 @@
 
         <div class="edit-skill-con__details">
           <div
-            v-show="isActive === skill.name"
+            v-show="isActive === skillKey"
             class="edit-skill-status-wrapp"
             v-for="(skill, skillKey) in skillData"
             :key="skillKey"
           >
-            <dl class="edit-skill-status" v-if="isActive === skill.name">
+            <dl class="edit-skill-status" v-if="isActive === skillKey">
               <dt class="edit-skill-status__title">
                 <h3 class="edit-skill-status__nominal">スキル名</h3>
                 <div class="form__group">
@@ -70,17 +82,33 @@
                 </ul>
                 <BaseBtnAdd
                   :addData="skill.skill_category_detail"
-                  :categoryName="'skill'"
+                  :categoryName="'skill-category'"
                 />
               </dd>
             </dl>
             <div class="edit-skill-uploads">
               <div class="edit-skill-uploads__area">
-                <h3 class="edit-skill-status__nominal">アイコンのアップロード</h3>
+                <h3 class="edit-skill-status__nominal">
+                  アイコンのアップロード
+                </h3>
                 <p class="edit-skill-uploads__logo">
-                  <img :src="skillUrl(skill)" :alt="skill.name" />
+                  <img
+                    v-if="!_.isEmpty(skill.upload_image)"
+                    :src="skill.upload_image"
+                    :alt="skill.name"
+                  />
+                  <img v-else :src="skillUrl(skill)" :alt="skill.name" />
                 </p>
-                <input type="file" name="" id="" />
+                <div class="edit-skill-uploads__button-area">
+                  <label class="file-upload-button"
+                    >Upload
+                    <input
+                      type="file"
+                      @change="skillImageUpload(skill, $event)"
+                      class="input-hidden"
+                    />
+                  </label>
+                </div>
               </div>
             </div>
 
@@ -103,12 +131,15 @@
               <!--.formgroup-->
             </div>
           </div>
+          <div class="buttons edit-button sp-on">
+            <TheBtnEdit />
+          </div>
         </div>
         <!--.edit-skill-con__details-->
       </div>
       <!--profile-sec__inner-->
     </section>
-    <div class="buttons edit-button">
+    <div class="buttons edit-button pc-on">
       <TheBtnEdit />
     </div>
   </div>
@@ -128,13 +159,13 @@ export default {
     TheBtnEdit,
   },
   async asyncData({ store }) {
-    return store.dispatch("skill/skillData").then((res) => {
+    return store.dispatch("skill/editSkillData").then((res) => {
       return { skillData: _.cloneDeep(res) };
     });
   },
   data() {
     return {
-      isActive: "HTML",
+      isActive: 1,
       activeMessage: "",
     };
   },
@@ -148,9 +179,21 @@ export default {
     },
   },
   methods: {
-    change(skill) {
-      this.isActive = skill.name;
+    change(skill, skillKey) {
+      this.isActive = skillKey;
       this.activeMessage = skill.skill_category_comment.comment;
+    },
+    skillImageUpload(skill, e) {
+      const file = e.target.files[0];
+      this.showSkillImage(skill, file);
+    },
+    showSkillImage(skill, file) {
+      const reader = new FileReader();
+
+      reader.onload = (e) => {
+        skill.upload_image = e.target.result;
+      };
+      reader.readAsDataURL(file);
     },
   },
 };
