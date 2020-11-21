@@ -21,5 +21,8 @@ export const actions = {
       commit('SET_PROFILE_DATA', res.data.data)
       return res.data.data
     })
+  },
+  updateProfile({ commit }, params) {
+    return this.$axios.post(params.apiUrl, params.data)
   }
 }

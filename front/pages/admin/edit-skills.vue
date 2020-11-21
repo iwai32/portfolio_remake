@@ -59,9 +59,9 @@
                   </div>
                 </div>
               </dt>
-              <dd v-if="!_.isEmpty(skill.skill_category_detail)">
+              <dd>
                 <h3 class="edit-skill-status__nominal">ポイント</h3>
-                <ul>
+                <ul v-if="!_.isEmpty(skill.skill_category_detail)">
                   <li
                     class="edit-skill-status__point"
                     v-for="(detail, detailKey) in skill.skill_category_detail"
@@ -131,16 +131,16 @@
               <!--.formgroup-->
             </div>
           </div>
-          <div class="buttons edit-button sp-on">
-            <TheBtnEdit />
+          <div class="buttons update-button sp-on">
+            <TheBtnUpdate />
           </div>
         </div>
         <!--.edit-skill-con__details-->
       </div>
       <!--profile-sec__inner-->
     </section>
-    <div class="buttons edit-button pc-on">
-      <TheBtnEdit />
+    <div class="buttons update-button pc-on">
+      <TheBtnUpdate />
     </div>
   </div>
 </template>
@@ -149,14 +149,14 @@
 import { mapGetters } from "vuex";
 import BaseBtnAdd from "~/components/atoms/BaseBtnAdd";
 import BaseBtnDelete from "~/components/atoms/BaseBtnDelete";
-import TheBtnEdit from "~/components/atoms/TheBtnEdit";
+import TheBtnUpdate from "~/components/atoms/TheBtnUpdate";
 
 export default {
   layout: "mypage",
   components: {
     BaseBtnAdd,
     BaseBtnDelete,
-    TheBtnEdit,
+    TheBtnUpdate,
   },
   async asyncData({ store }) {
     return store.dispatch("skill/editSkillData").then((res) => {
@@ -172,9 +172,11 @@ export default {
   computed: {
     skillUrl(skill) {
       return function (skill) {
-        return (
-          process.env.API_URL + skill.profile_id + "/" + skill.skill_icon_img
-        );
+        if (!_.isEmpty(skill)) {
+          return (
+            process.env.API_URL + skill.profile_id + "/" + skill.skill_icon_img
+          );
+        }
       };
     },
   },

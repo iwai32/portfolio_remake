@@ -12,7 +12,9 @@
               v-model.trim="loginForm.email"
               required
             />
-            <span class="form__group__attention">{{ validation.email }}</span>
+            <span class="form__group__attention">{{
+              validation.login.email
+            }}</span>
           </div>
         </div>
         <!--.formgroup-->
@@ -27,7 +29,7 @@
               required
             />
             <span class="form__group__attention">{{
-              validation.password
+              validation.login.password
             }}</span>
           </div>
         </div>
@@ -49,40 +51,41 @@
 </template>
 
 <script>
-import Validation from "~/const/validation";
+import validation from "~/mixins/validation";
 export default {
   middleware({ store, redirect }) {
     if (store.$auth.loggedIn) {
       redirect("/admin/nav");
     }
   },
+  mixins: [validation],
   data() {
     return {
       loginForm: {
         email: "",
         password: "",
       },
-      validation: {
-        email: "",
-        password: "",
-      },
     };
-  },
-  watch: {
-    "loginForm.email": function (val) {
-      this.validEmail(val);
-    },
-    "loginForm.password": function (val) {
-      this.validPassword(val);
-    },
   },
   computed: {
     isSuccess() {
-      let emailOk =
-        this.loginForm.email.length !== 0 && this.validation.email.length === 0;
-      let passwordOk =
-        this.loginForm.password.length !== 0 &&
-        this.validation.password.length === 0;
+      let emailOk = false;
+      let passwordOk = false;
+
+      if (
+        _.get(this.loginForm, "email").length !== 0 &&
+        _.get(this.validation, "login.email").length === 0
+      ) {
+        emailOk = true;
+      }
+
+      if (
+        _.get(this.loginForm, "password").length !== 0 &&
+        _.get(this.validation, "login.password").length === 0
+      ) {
+        passwordOk = true;
+      }
+
       if (emailOk && passwordOk) {
         return true;
       }
@@ -90,28 +93,6 @@ export default {
     },
   },
   methods: {
-    validEmail(val) {
-      const reg = new RegExp(
-        "^[A-Za-z0-9]{1}[A-Za-z0-9_.-]*@{1}[A-Za-z0-9_.-]{1,}.[A-Za-z0-9]{1,}$"
-      );
-
-      if (val.length === 0) {
-        this.validation.email = Validation.MSG_REQUIRED;
-      } else if (!reg.test(val)) {
-        this.validation.email = Validation.EMAIL_TYPE;
-      } else {
-        this.validation.email = "";
-      }
-    },
-    validPassword(val) {
-      if (val.length === 0) {
-        this.validation.password = Validation.MSG_REQUIRED;
-      } else if (val.length < 6) {
-        this.validation.password = Validation.PASSWORD_MIN;
-      } else {
-        this.validation.password = "";
-      }
-    },
     login() {
       this.$auth
         .loginWith("local", {

@@ -4,93 +4,98 @@
       <div class="edit-profile-sec__inner">
         <h2 class="edit-profile-title">Edit-Profile</h2>
         <div class="form edit-profile-form">
-          <h3 class="section-title">プロフィール</h3>
+          <div>
+            <h3 class="section-title">プロフィール</h3>
 
-          <div class="form__group">
-            <label class="form__group__label" for="prof-name">お名前：</label>
-            <div class="form__group__inputs">
-              <input
-                type="text"
-                id="prof-name"
-                required
-                v-model="profileData.name"
-              />
+            <div class="form__group">
+              <label class="form__group__label" for="prof-name">お名前：</label>
+              <div class="form__group__inputs">
+                <input
+                  type="text"
+                  id="prof-name"
+                  required
+                  v-model="profileData.name"
+                />
+                <span class="form__group__attention">{{ validation.profile.name }}</span>
+              </div>
             </div>
-          </div>
-          <!--.formgroup-->
+            <!--.formgroup-->
 
-          <div class="form__group">
-            <label class="form__group__label" for="prof-birth"
-              >生年月日：</label
-            >
-            <div class="form__group__inputs">
-              <input
-                type="date"
-                id="prof-birth"
-                required
-                v-model="profileData.birth_day"
-              />
-            </div>
-          </div>
-          <!--.formgroup-->
-
-          <div class="form__group">
-            <label class="form__group__label" for="prof-sp-skill">特技：</label>
-            <div class="form__group__inputs">
-              <span
-                class="input-group"
-                v-if="!_.isEmpty(profileData.special_skill)"
+            <div class="form__group">
+              <label class="form__group__label" for="prof-birth"
+                >生年月日：</label
               >
-                <span
-                  v-for="(skill, skillKey) in profileData.special_skill"
-                  :key="skillKey"
-                  class="input del-point"
-                  ><input
-                    type="text"
-                    id="prof-sp-skill"
-                    required
-                    v-model="skill.content"
-                  />
-                  <BaseBtnDelete
-                    :deleteData="profileData.special_skill"
-                    :dataKey="skillKey"
-                    :customClassName="'skill-delete-button'"
-                  />
-                </span>
-              </span>
-              <BaseBtnAdd
-                :addData="profileData.special_skill"
-                :categoryName="'sp-skill'"
-              />
+              <div class="form__group__inputs">
+                <input
+                  type="date"
+                  id="prof-birth"
+                  required
+                  v-model="profileData.birth_day"
+                />
+              </div>
             </div>
-          </div>
-          <!--.formgroup-->
+            <!--.formgroup-->
 
-          <div class="form__group">
-            <label class="form__group__label">趣味：</label>
-            <div class="form__group__inputs">
-              <span
-                v-if="!_.isEmpty(profileData.special_hobby)"
-                class="input-group"
-                ><span
-                  v-for="(hobby, hobbyKey) in profileData.special_hobby"
-                  :key="hobbyKey"
-                  class="input del-point"
+            <div class="form__group">
+              <label class="form__group__label" for="prof-sp-skill"
+                >特技：</label
+              >
+              <div class="form__group__inputs">
+                <span
+                  class="input-group"
+                  v-if="!_.isEmpty(profileData.special_skill)"
                 >
-                  <input type="text" required v-model="hobby.content" />
-                  <BaseBtnDelete
-                    :deleteData="profileData.special_hobby"
-                    :dataKey="hobbyKey"
-                    :customClassName="'hobby-delete-button'"
-                  /> </span
-              ></span>
-              <BaseBtnAdd
-                :addData="profileData.special_hobby"
-                :categoryName="'hobby'"
-              />
+                  <span
+                    v-for="(skill, skillKey) in profileData.special_skill"
+                    :key="skillKey"
+                    class="input del-point"
+                    ><input
+                      type="text"
+                      id="prof-sp-skill"
+                      required
+                      v-model="skill.content"
+                    />
+                    <BaseBtnDelete
+                      :deleteData="profileData.special_skill"
+                      :dataKey="skillKey"
+                      :customClassName="'skill-delete-button'"
+                    />
+                  </span>
+                </span>
+                <BaseBtnAdd
+                  :addData="profileData.special_skill"
+                  :categoryName="'sp-skill'"
+                />
+              </div>
             </div>
+            <!--.formgroup-->
+
+            <div class="form__group">
+              <label class="form__group__label">趣味：</label>
+              <div class="form__group__inputs">
+                <span
+                  v-if="!_.isEmpty(profileData.special_hobby)"
+                  class="input-group"
+                  ><span
+                    v-for="(hobby, hobbyKey) in profileData.special_hobby"
+                    :key="hobbyKey"
+                    class="input del-point"
+                  >
+                    <input type="text" required v-model="hobby.content" />
+                    <BaseBtnDelete
+                      :deleteData="profileData.special_hobby"
+                      :dataKey="hobbyKey"
+                      :customClassName="'hobby-delete-button'"
+                    /> </span
+                ></span>
+                <BaseBtnAdd
+                  :addData="profileData.special_hobby"
+                  :categoryName="'hobby'"
+                />
+              </div>
+            </div>
+            <!--.formgroup-->
           </div>
-          <!--.formgroup-->
 
           <hr class="under-line" />
           <!-- キャリア -->
@@ -194,8 +199,8 @@
       <!--.profile-sec__inner-->
     </section>
     <!--.profile-sec #profileArea-->
-    <div class="buttons edit-button">
-      <TheBtnEdit />
+    <div class="buttons update-button">
+      <TheBtnUpdate :categoryName="'profile'" :updateData="profileData" />
     </div>
   </div>
   <!--.profile-con-->
@@ -206,7 +211,8 @@
 import { mapGetters } from "vuex";
 import BaseBtnAdd from "~/components/atoms/BaseBtnAdd";
 import BaseBtnDelete from "~/components/atoms/BaseBtnDelete";
-import TheBtnEdit from "~/components/atoms/TheBtnEdit";
+import TheBtnUpdate from "~/components/atoms/TheBtnUpdate";
+import validation from "~/mixins/validation"
 
 export default {
   //middlewareを定義する
@@ -214,8 +220,9 @@ export default {
   components: {
     BaseBtnAdd,
     BaseBtnDelete,
-    TheBtnEdit,
+    TheBtnUpdate,
   },
+  mixins: [validation],
   async asyncData({ store }) {
     return store.dispatch("profile/profileData").then((res) => {
       return { profileData: _.cloneDeep(res) };
