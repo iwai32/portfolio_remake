@@ -1,0 +1,229 @@
+.edit-works {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  padding: 20px;
+  max-width: 1000px;
+
+  @include sp {
+    padding: 10px 1.2%;
+  }
+
+  &__title {
+    font-size: 2.8rem;
+    padding: 10px;
+    margin: 0 auto 20px;
+    margin: 0;
+    letter-spacing: 0.25em;
+
+    @include sp {
+      font-size: 2.2rem;
+      padding: 10px 1.2%;
+      margin: 0 auto;
+      letter-spacing: 0.2em;
+      white-space: nowrap;
+    }
+  }
+
+  &__inner--top {
+    width: 100%;
+    border: 4px solid #fff;
+    border-radius: 10px;
+    overflow-x: scroll;
+    height: 60vh;
+    padding: 20px;
+
+    @include sp {
+      overflow-y: scroll;
+      overflow-x: scroll;
+      max-height: 200px;
+      height: 200px;
+      padding: 20px 2.2% 10px; //10px
+      margin: 0;
+    }
+  }
+
+  &__inner--bottom {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+
+    @include sp {
+      background: #444;
+      display: flex;
+      flex-wrap: wrap;
+    }
+  }
+}
+
+.edit-works-list {
+  display: flex;
+  flex-flow: row wrap;
+
+  .work-item {
+    width: 25%;
+    max-width: 228px;
+    padding: 10px;
+
+    &__frame {
+      cursor: pointer;
+      display: block;
+      margin: 0 auto;
+      text-align: center;
+      width: 87.8%; //200px
+    }
+
+    .work-item-delete-button {
+      color: #fff;
+      top: 0;
+      right: 0;
+    }
+  }
+
+  @include sp {
+    width: 2800px;
+
+    .work-item {
+      max-width: 140px;
+      padding-bottom: 0;
+
+      &__title {
+        font-size: 1.2rem;
+        line-height: 1.5;
+        padding-left: 5%;
+      }
+
+      &__category {
+        font-size: 1rem;
+        padding-left: 5%;
+      }
+    }
+  }
+}
+
+.edit-work-show {
+  .form__group {
+    &__inputs {
+      margin-bottom: 10px;
+      width: 100%;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      label {
+        font-size: 18px;
+        width: 100%;
+
+        span {
+          margin-right: 6px;
+        }
+      }
+
+      input {
+        padding: 2px;
+      }
+    }
+  }
+}
+
+.work-item-form__group {
+  padding: 10px;
+  margin-bottom: 10px;
+  input {
+    width: 100%;
+  }
+}
+
+.product-form__group {
+  margin-bottom: 40px;
+  width: 80%;
+
+  label {
+    span {
+      font-size: 16px;
+    }
+  }
+}
+
+.pd-form__group {
+  margin-bottom: 10px;
+
+  label {
+    font-size: 14px;
+  }
+
+  input {
+    padding: 2px;
+  }
+}
+
+.p-form__group {
+  margin-bottom: 0;
+
+  input {
+    width: 90%;
+  }
+  .point-delete-button {
+    color: #fff;
+    right: 0;
+  }
+}
+
+.detail-form__group {
+  display: flex;
+  margin-bottom: 0;
+  label {
+    font-size: 14px;
+  }
+  .detail-delete-button {
+    color: #fff;
+    right: 0;
+  }
+}
+
+.comment-form__group {
+  span {
+    display: block;
+    font-size: 14px;
+    letter-spacing: .15rem;
+    margin-bottom: 5px;
+  }
+}
+
+.edit-work-container {
+  max-width: 800px;
+
+  &__button-area {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+  }
+}
+
+.edit-work-lead {
+
+  dt,
+  dd {
+    width: 100%;
+  }
+}
+
+.edit-work-txt {
+  padding: 0;
+  width: 100%;
+
+  label {
+    width: 100%;
+  }
+
+  textarea {
+    padding: 4px;
+    width: 100%;
+    line-height: 1.2;
+  }
+}
+
+.edit-work-button {
+  width: 100%;
+}

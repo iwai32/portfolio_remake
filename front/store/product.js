@@ -20,5 +20,12 @@ export const actions = {
     .then((res) => {
       commit('SET_PRODUCT_DATA', res.data.data)
     })
+  },
+  editProductData({ commit }) {
+    return this.$axios.get('/api/edit-product')
+    .then((res) => {
+      commit('SET_PRODUCT_DATA', res.data.data)
+      return res.data.data
+    })
   }
 }
