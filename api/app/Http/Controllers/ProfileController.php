@@ -4,15 +4,32 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Profile\Profile;
+use App\Models\Profile\ProfilePr;
+use App\Models\Profile\ProfileCareer;
+use App\Models\Profile\ProfileSpecialHobby;
+use App\Models\Profile\ProfileSpecialSkill;
 use App\Http\Resources\profileResource;
 
 class ProfileController extends Controller
 {
   private $profile;
+  private $pr;
+  private $career;
+  private $specialHobby;
+  private $specialSkill;
 
-  public function __construct(Profile $profile)
-  {
+  public function __construct(
+    Profile $profile,
+    ProfilePr $pr,
+    ProfileCareer $career,
+    ProfileSpecialHobby $specialHobby,
+    ProfileSpecialSkill $specialSkill
+  ) {
     $this->profile = $profile;
+    $this->pr = $pr;
+    $this->career = $career;
+    $this->specialHobby = $specialHobby;
+    $this->specialSkill = $specialSkill;
   }
 
   /**
@@ -46,7 +63,6 @@ class ProfileController extends Controller
    */
   public function store(Request $request)
   {
-    //
   }
 
   /**
@@ -78,9 +94,76 @@ class ProfileController extends Controller
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
-  public function update(Request $request, $id)
+  public function update(Request $request)
   {
-    //
+    $profileData = $this->profile
+      ->find(config('const.MY_PROFILE_ID'))
+      ->load('profilePr', 'specialSkill', 'specialHobby', 'profileCareer');
+
+    $inputs = $request->all();
+    $diffData = [
+      'pr' => [
+        'input' => $inputs['profile_pr'],
+        'original' => $profileData->profilePr,
+        'model' => $this->pr
+      ],
+      'spSkill' => [
+        'input' => $inputs['special_skill'],
+        'original' => $profileData->specialSkill,
+        'model' => $this->specialSkill
+      ],
+      'spHobby' => [
+        'input' => $inputs['special_hobby'],
+        'original' => $profileData->specialHobby,
+        'model' => $this->specialHobby
+      ],
+      'prCareer' => [
+        'input' => $inputs['profile_career'],
+        'original' => $profileData->profileCareer,
+        'model' => $this->career
+      ],
+    ];
+
+    $this->profile->find(config('const.MY_PROFILE_ID'))->update($inputs);
+    foreach ($diffData as $data) {
+      $this->deleteDiff($data);
+      $this->updateOrCreateData($data);
+    }
+  }
+
+  /**
+   * 元々DBに保存されているデータのidとリクエストで送られてきたidを比較し、差分を削除する
+   *
+   * @param array $target
+   * @return void
+   */
+  public function deleteDiff(array $target): void
+  {
+    foreach ($target['original'] as $original) {
+      $diffIds = null;
+      $diffIds = array_column($target['input'], 'id');
+
+      if (!in_array($original->id, $diffIds)) {
+        $original->delete();
+      }
+    }
+  }
+
+  /**
+   * 更新か削除をする
+   *
+   * @param array $target
+   * @return void
+   */
+  public function updateOrCreateData(array $target): void
+  {
+    foreach ($target['input'] as $input) {
+      $input['profile_id'] = config('const.MY_PROFILE_ID');
+      $target['model']->updateOrCreate(
+        ['id' => isset($input['id']) ? $input['id'] : 0],
+        $input
+      );
+    }
   }
 
   /**

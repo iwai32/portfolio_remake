@@ -27,10 +27,14 @@ Route::group([
   Route::post('login', 'AuthController@login');
   Route::post('logout', 'AuthController@logout');
   Route::post('refresh', 'AuthController@refresh');
-  Route::post('me', 'AuthController@me');
+  Route::get('me', 'AuthController@me');
   Route::post('generate', 'AuthController@passwordGenerate');
+
+  Route::post('update-profile', 'ProfileController@update');
 });
 
 Route::get('/profile', 'ProfileController@index');
 Route::get('/skill', 'SkillController@index');
+Route::get('/edit-skill', 'SkillController@edit');
 Route::get('/product', 'ProductController@index');
+Route::get('/edit-product', 'ProductController@edit');

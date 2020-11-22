@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Skill\SkillCategory;
 use App\Http\Resources\skillResource;
+use App\Http\Resources\editSkillResource;
 
 class SkillController extends Controller
 {
@@ -67,9 +68,13 @@ class SkillController extends Controller
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
-  public function edit($id)
+  public function edit()
   {
-    //
+    return editSkillResource::collection(
+      $this->skill->where('profile_id', config('const.MY_PROFILE_ID'))
+        ->with('skillCategoryDetail', 'skillCategoryComment')
+        ->get()
+    );
   }
 
   /**

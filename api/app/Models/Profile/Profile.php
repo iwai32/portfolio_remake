@@ -7,6 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class Profile extends Model
 {
   protected $table = 'profiles';
+  protected $fillable = [
+    'name',
+    'birth_day',
+    'one_thing',
+    'my_icon_img'
+  ];
 
   /**
    * relations

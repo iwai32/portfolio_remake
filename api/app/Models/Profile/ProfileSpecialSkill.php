@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class ProfileSpecialSkill extends Model
 {
   use SoftDeletes;
-  
   protected $table = 'profile_special_skills';
+  protected $fillable = [
+    'content',
+    'profile_id'
+  ];
 }
