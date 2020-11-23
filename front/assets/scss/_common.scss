@@ -87,6 +87,20 @@
   }
 }
 
+/*ポップアップ*/
+.update-pop-up {
+  background: #666;
+  border: 2px solid #fff;
+  border-radius: 10px;
+  font-size: 1.4rem;
+  padding: 10px;
+  position: fixed;
+  top: 5%;
+  width: 50%;
+  z-index: 9999;
+}
+
+/*ボタンUI*/
 .buttons {
   padding: 10px 0;
   .button {
@@ -149,8 +163,6 @@
     transition: .4s;
   }
 }
-
-
 
 /*フォームUI*/
 .form {

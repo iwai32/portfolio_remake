@@ -32,6 +32,18 @@ body {
   opacity: 0
 }
 
+.fade-leave-active {
+  transition: opacity 2s;
+}
+
+.fade-leave {
+  opacity: 1;
+}
+
+.fade-leave-to {
+  opacity: 0;
+}
+
 .sp-on {
   display: none;
 

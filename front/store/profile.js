@@ -9,20 +9,33 @@ export const mutations = {
 }
 
 export const getters = {
-  profileData (state) {
+  profileData(state) {
     return state.profileData
   }
 }
 
 export const actions = {
-  profileData({ commit }) {
+  profileData({
+    commit
+  }) {
     return this.$axios.get('/api/profile')
-    .then((res) => {
-      commit('SET_PROFILE_DATA', res.data.data)
-      return res.data.data
-    })
+      .then((res) => {
+        commit('SET_PROFILE_DATA', res.data.data)
+        return res.data.data
+      })
   },
-  updateProfile({ commit }, params) {
-    return this.$axios.post(params.apiUrl, params.data)
+  async updateProfile({
+    commit
+  }, params) {
+
+    try {
+
+      const response = await this.$axios.post(params.apiUrl, params.data)
+      return response
+    } catch (error) {
+      
+      return error
+    }
+
   }
 }

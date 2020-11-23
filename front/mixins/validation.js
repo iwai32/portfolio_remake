@@ -9,6 +9,12 @@ export default {
     "profileData.name": function (val) {
       this.$_validProfileName(val)
     },
+    "profileData.profile_career": {
+      handler(careers) {
+        this.$_validCareerData(careers)
+      },
+      deep: true
+    }
   },
   data() {
     return {
@@ -21,12 +27,78 @@ export default {
           password: "",
         },
         profile: {
-          name: ""
-        }
+          name: "",
+        },
+        profileCareer: []
       },
     }
   },
   methods: {
+    //明日リファクタリングする
+    $_allValidCheck(validData) {
+      let isSuccess = true
+
+      _.forEach(validData, function (vData) {
+        _.forEach(vData, function (vValue) {
+          if (!_.isEmpty(vValue)) {
+
+            if (typeof vValue === 'object') {
+
+              _.forEach(vValue, function (test) {
+                if (!_.isEmpty(test)) {
+                  isSuccess = false
+                }
+              })
+
+            } else {
+
+              isSuccess = false
+            }
+          }
+        })
+      })
+
+      return isSuccess
+    },
+    $_validCareerData(careers) {
+      const VM = this
+      _.forEach(careers, function (career, careerKey) {
+
+        if (_.isEmpty(VM.validation.profileCareer[careerKey])) {
+          //validation用のobjectを作成する
+          VM.validation.profileCareer.push({
+            content: "",
+            date_from: ""
+          })
+        }
+      })
+    },
+    $_validCareerContent(career, careerKey) {
+      //企業名の入力チェック
+      if (!_.isEmpty(this.validation.profileCareer[careerKey])) {
+
+        if (career.content.length === 0) {
+          this.validation.profileCareer[careerKey].content = this.msg_required
+        } else {
+          this.validation.profileCareer[careerKey].content = ""
+        }
+
+        return this.validation.profileCareer[careerKey].content
+      }
+    },
+    $_validCareerDateFrom(career, careerKey) {
+      //キャリア開始日の入力チェック
+      if (!_.isEmpty(this.validation.profileCareer[careerKey])) {
+
+        if (career.date_from.length === 0) {
+          this.validation.profileCareer[careerKey].date_from = this.msg_required
+        } else {
+          this.validation.profileCareer[careerKey].date_from = ""
+        }
+
+        return this.validation.profileCareer[careerKey].date_from
+      }
+    },
     $_validEmail(val) {
       const reg = new RegExp(
         "^[A-Za-z0-9]{1}[A-Za-z0-9_.-]*@{1}[A-Za-z0-9_.-]{1,}.[A-Za-z0-9]{1,}$"

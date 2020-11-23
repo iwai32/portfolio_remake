@@ -172,7 +172,7 @@
       </div>
 
       <div class="buttons update-button edit-work-button" v-if="isEdit">
-        <TheBtnUpdate />
+        <BaseBtnUpdate />
       </div>
     </div>
   </div>
@@ -181,13 +181,13 @@
 <script>
 import BaseBtnAdd from "~/components/atoms/BaseBtnAdd";
 import BaseBtnDelete from "~/components/atoms/BaseBtnDelete";
-import TheBtnUpdate from "~/components/atoms/TheBtnUpdate";
+import BaseBtnUpdate from "~/components/atoms/BaseBtnUpdate";
 
 export default {
   components: {
     BaseBtnAdd,
     BaseBtnDelete,
-    TheBtnUpdate,
+    BaseBtnUpdate,
   },
   props: {
     productData: {

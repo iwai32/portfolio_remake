@@ -2,12 +2,14 @@
   <section class="admin-con">
     <div>
       <h2 class="admin-con__title">Edit</h2>
+      <TheUpdatePopUp/>
       <PageNavBtns :PageNavBtnList="PageNavBtnList" :PageClass="'admin'" />
     </div>
   </section>
 </template>
 
 <script>
+import TheUpdatePopUp from "~/components/atoms/TheUpdatePopUp"
 import PageNavBtns from "~/components/molecules/PageNavBtns";
 
 export default {
@@ -17,6 +19,7 @@ export default {
     }
   },
   components: {
+    TheUpdatePopUp,
     PageNavBtns,
   },
   data() {
@@ -39,9 +42,6 @@ export default {
         },
       ],
     };
-  },
+  }
 };
 </script>
-
-<style>
-</style>

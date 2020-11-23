@@ -7,7 +7,7 @@
           <div>
             <h3 class="section-title">プロフィール</h3>
 
-            <div class="form__group">
+            <div class="form__group profile-form__group">
               <label class="form__group__label" for="prof-name">お名前：</label>
               <div class="form__group__inputs">
                 <input
@@ -21,7 +21,7 @@
             </div>
             <!--.formgroup-->
 
-            <div class="form__group">
+            <div class="form__group profile-form__group">
               <label class="form__group__label" for="prof-birth"
                 >生年月日：</label
               >
@@ -36,8 +36,23 @@
             </div>
             <!--.formgroup-->
 
-            <div class="form__group">
-              <label class="form__group__label" for="prof-sp-skill"
+            <div class="form__group profile-form__group">
+              <label class="form__group__label" for="prof-one-thing"
+                >ひとこと：</label
+              >
+              <div class="form__group__inputs">
+                <input
+                  type="text"
+                  id="prof-one-thing"
+                  required
+                  v-model="profileData.one_thing"
+                />
+              </div>
+            </div>
+            <!--.formgroup-->
+
+            <div class="form__group profile-form__group">
+              <label class="form__group__label"
                 >特技：</label
               >
               <div class="form__group__inputs">
@@ -51,7 +66,6 @@
                     class="input del-point"
                     ><input
                       type="text"
-                      id="prof-sp-skill"
                       required
                       v-model="skill.content"
                     />
@@ -70,7 +84,7 @@
             </div>
             <!--.formgroup-->
 
-            <div class="form__group">
+            <div class="form__group profile-form__group">
               <label class="form__group__label">趣味：</label>
               <div class="form__group__inputs">
                 <span
@@ -117,6 +131,7 @@
                     required
                     v-model="career.date_from"
                   />
+                  <span class="form__group__attention">{{ $_validCareerDateFrom(career, careerKey) }}</span>
                 </div>
               </div>
               <!--.formgroup-->
@@ -145,7 +160,8 @@
               <div class="form__group">
                 <label class="form__group__label">企業名：</label>
                 <div class="form__group__inputs content">
-                  <input type="text" required v-model="career.content" />
+                  <input type="text" required v-model="career.content"/>
+                  <span class="form__group__attention">{{ $_validCareerContent(career, careerKey) }}</span>
                 </div>
               </div>
               <!--.formgroup-->
@@ -200,7 +216,7 @@
     </section>
     <!--.profile-sec #profileArea-->
     <div class="buttons update-button">
-      <TheBtnUpdate :categoryName="'profile'" :updateData="profileData" />
+      <BaseBtnUpdate :categoryName="'profile'" :updateData="profileData" :validData="validation"/>
     </div>
   </div>
   <!--.profile-con-->
@@ -211,7 +227,7 @@
 import { mapGetters } from "vuex";
 import BaseBtnAdd from "~/components/atoms/BaseBtnAdd";
 import BaseBtnDelete from "~/components/atoms/BaseBtnDelete";
-import TheBtnUpdate from "~/components/atoms/TheBtnUpdate";
+import BaseBtnUpdate from "~/components/atoms/BaseBtnUpdate";
 import validation from "~/mixins/validation"
 
 export default {
@@ -220,7 +236,7 @@ export default {
   components: {
     BaseBtnAdd,
     BaseBtnDelete,
-    TheBtnUpdate,
+    BaseBtnUpdate,
   },
   mixins: [validation],
   async asyncData({ store }) {

@@ -132,7 +132,7 @@
             </div>
           </div>
           <div class="buttons update-button sp-on">
-            <TheBtnUpdate />
+            <BaseBtnUpdate />
           </div>
         </div>
         <!--.edit-skill-con__details-->
@@ -140,7 +140,7 @@
       <!--profile-sec__inner-->
     </section>
     <div class="buttons update-button pc-on">
-      <TheBtnUpdate />
+      <BaseBtnUpdate />
     </div>
   </div>
 </template>
@@ -149,14 +149,14 @@
 import { mapGetters } from "vuex";
 import BaseBtnAdd from "~/components/atoms/BaseBtnAdd";
 import BaseBtnDelete from "~/components/atoms/BaseBtnDelete";
-import TheBtnUpdate from "~/components/atoms/TheBtnUpdate";
+import BaseBtnUpdate from "~/components/atoms/BaseBtnUpdate";
 
 export default {
   layout: "mypage",
   components: {
     BaseBtnAdd,
     BaseBtnDelete,
-    TheBtnUpdate,
+    BaseBtnUpdate,
   },
   async asyncData({ store }) {
     return store.dispatch("skill/editSkillData").then((res) => {

@@ -227,4 +227,15 @@
       }
     }
   }
+
+  .profile-form__group {
+    label {
+      width: 10%;
+    }
+    @include sp {
+      label {
+        width: 24%;
+      }
+    }
+  }
 }
