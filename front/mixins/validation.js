@@ -34,28 +34,51 @@ export default {
     }
   },
   methods: {
-    //明日リファクタリングする
     $_allValidCheck(validData) {
       let isSuccess = true
+      const VM = this
 
       _.forEach(validData, function (vData) {
-        _.forEach(vData, function (vValue) {
-          if (!_.isEmpty(vValue)) {
+        isSuccess = VM.$_validCheck(vData);
+      })
 
-            if (typeof vValue === 'object') {
+      return isSuccess
+    },
+    $_validCheck(vData) {
+      let isSuccess = true
+      const VM = this
 
-              _.forEach(vValue, function (test) {
-                if (!_.isEmpty(test)) {
-                  isSuccess = false
-                }
-              })
+      _.forEach(vData, function (vData2) {
+        if (!_.isEmpty(vData2)) {
+          //バリデーションメッセージが表示されているかチェックする
+          if (typeof vData2 === 'object') {
+            //オブジェクトなら値を回して空か判定する
+            isSuccess = VM.$_validCheckDeeply(vData2)
 
-            } else {
+          } else {
 
-              isSuccess = false
-            }
+            isSuccess = false
           }
-        })
+        }
+      })
+
+      return isSuccess
+    },
+    $_validCheckDeeply(obj) {
+      let isSuccess = true
+
+      _.forEach(obj, function (childObj) {
+        if (!_.isEmpty(childObj)) {
+
+          if (typeof childObj === 'object') {
+
+            //オブジェクトなら値を回して空か判定する
+            isSuccess = VM.$_validCheckDeeply(childObj)
+          } else {
+
+            isSuccess = false
+          }
+        }
       })
 
       return isSuccess
