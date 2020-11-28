@@ -131,7 +131,7 @@
                     required
                     v-model="career.date_from"
                   />
-                  <span class="form__group__attention">{{ $_validCareerDateFrom(career, careerKey) }}</span>
+                  <span class="form__group__attention">{{ $_validLength(career, careerKey, 'careerdate') }}</span>
                 </div>
               </div>
               <!--.formgroup-->
@@ -161,7 +161,7 @@
                 <label class="form__group__label">企業名：</label>
                 <div class="form__group__inputs content">
                   <input type="text" required v-model="career.content"/>
-                  <span class="form__group__attention">{{ $_validCareerContent(career, careerKey) }}</span>
+                  <span class="form__group__attention">{{ $_validLength(career, careerKey, 'career') }}</span>
                 </div>
               </div>
               <!--.formgroup-->

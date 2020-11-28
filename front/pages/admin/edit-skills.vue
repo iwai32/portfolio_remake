@@ -43,6 +43,7 @@
         </div>
         <!--edit-skill-con__category-->
 
+        {{ skillData[0].skill_category_detail }}
         <div class="edit-skill-con__details">
           <div
             v-show="isActive === skillKey"
@@ -56,6 +57,7 @@
                 <div class="form__group">
                   <div class="form__group__inputs">
                     <input type="text" required v-model="skill.name" />
+                    <span class="form__group__attention">{{ $_validLength(skill, skillKey, 'skill') }}</span>
                   </div>
                 </div>
               </dt>
@@ -70,6 +72,7 @@
                     <div class="form__group">
                       <div class="form__group__inputs del-point">
                         <input type="text" required v-model="detail.message" />
+                        <span class="form__group__attention">書くなら必須</span>
                         <BaseBtnDelete
                           :deleteData="skill.skill_category_detail"
                           :dataKey="detailKey"
@@ -126,13 +129,14 @@
                     required
                     v-model="skill.skill_category_comment.comment"
                   />
+                  <span class="form__group__attention">書くなら必須</span>
                 </div>
               </div>
               <!--.formgroup-->
             </div>
           </div>
           <div class="buttons update-button sp-on">
-            <BaseBtnUpdate />
+            <BaseBtnUpdate :validData="validation" :updateData="skillData" :categoryName="'skill'"/>
           </div>
         </div>
         <!--.edit-skill-con__details-->
@@ -140,7 +144,7 @@
       <!--profile-sec__inner-->
     </section>
     <div class="buttons update-button pc-on">
-      <BaseBtnUpdate />
+      <BaseBtnUpdate :validData="validation" :updateData="skillData" :categoryName="'skill'" />
     </div>
   </div>
 </template>
@@ -150,6 +154,7 @@ import { mapGetters } from "vuex";
 import BaseBtnAdd from "~/components/atoms/BaseBtnAdd";
 import BaseBtnDelete from "~/components/atoms/BaseBtnDelete";
 import BaseBtnUpdate from "~/components/atoms/BaseBtnUpdate";
+import validation from "~/mixins/validation"
 
 export default {
   layout: "mypage",
@@ -158,6 +163,7 @@ export default {
     BaseBtnDelete,
     BaseBtnUpdate,
   },
+  mixins: [validation],
   async asyncData({ store }) {
     return store.dispatch("skill/editSkillData").then((res) => {
       return { skillData: _.cloneDeep(res) };

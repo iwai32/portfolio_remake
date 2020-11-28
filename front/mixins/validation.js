@@ -11,7 +11,13 @@ export default {
     },
     "profileData.profile_career": {
       handler(careers) {
-        this.$_validCareerData(careers)
+        this.$_generateValidData(careers, 'careers')
+      },
+      deep: true
+    },
+    "skillData": {
+      handler(skills) {
+        this.$_generateValidData(skills, 'skills')
       },
       deep: true
     }
@@ -29,6 +35,7 @@ export default {
         profile: {
           name: "",
         },
+        skillData: [],
         profileCareer: []
       },
     }
@@ -83,44 +90,76 @@ export default {
 
       return isSuccess
     },
-    $_validCareerData(careers) {
+    //バリデーション用のデータを生成する
+    $_generateValidData(data, categoryName) {
       const VM = this
-      _.forEach(careers, function (career, careerKey) {
+      let validData = null
+      let pushData = null
 
-        if (_.isEmpty(VM.validation.profileCareer[careerKey])) {
-          //validation用のobjectを作成する
-          VM.validation.profileCareer.push({
+      _.forEach(data, function (datum, dataKey) {
+        if (categoryName === 'careers') {
+          validData = VM.validation.profileCareer
+          pushData = {
             content: "",
             date_from: ""
-          })
+          }
+
+        } else if (categoryName === 'skills') {
+          validData = VM.validation.skillData
+          pushData = {
+            name: ""
+          }
+
+          //categoryなら$validpushを呼び出し追加する
+        }
+
+        if (_.isEmpty(validData[dataKey])) {
+          VM.$_validPushData(validData, pushData)
         }
       })
     },
-    $_validCareerContent(career, careerKey) {
-      //企業名の入力チェック
-      if (!_.isEmpty(this.validation.profileCareer[careerKey])) {
-
-        if (career.content.length === 0) {
-          this.validation.profileCareer[careerKey].content = this.msg_required
-        } else {
-          this.validation.profileCareer[careerKey].content = ""
-        }
-
-        return this.validation.profileCareer[careerKey].content
-      }
+    //validation用のobjectを作成する
+    $_validPushData(data, obj) {
+      data.push(obj)
     },
-    $_validCareerDateFrom(career, careerKey) {
-      //キャリア開始日の入力チェック
-      if (!_.isEmpty(this.validation.profileCareer[careerKey])) {
+    //入力チェック
+    $_validLength(data, dataKey, categoryName) {
+      let validData = null
+      let targetLength = null;
+      let targetValidDatum = null
 
-        if (career.date_from.length === 0) {
-          this.validation.profileCareer[careerKey].date_from = this.msg_required
+      if (categoryName === "career") {
+
+        //企業名の入力チェック
+        validData = this.validation.profileCareer
+        targetLength = data.content.length
+        targetValidDatum = !_.isEmpty(validData[dataKey]) ? validData[dataKey].content: ""
+      } else if (categoryName === "careerdate") {
+
+        //キャリア開始日の入力チェック
+        validData = this.validation.profileCareer
+        targetLength = data.date_from.length
+        targetValidDatum = !_.isEmpty(validData[dataKey]) ? validData[dataKey].date_from: ""
+      } else if (categoryName === "skill") {
+
+        //スキル名の入力チェック
+        validData = this.validation.skillData
+        targetLength = data.name.length
+        targetValidDatum = !_.isEmpty(validData[dataKey]) ? validData[dataKey].name: ""
+      }
+
+
+      if (!_.isEmpty(validData[dataKey])) {
+
+        if (targetLength === 0) {
+          targetValidDatum = this.msg_required
         } else {
-          this.validation.profileCareer[careerKey].date_from = ""
+          targetValidDatum = ""
         }
 
-        return this.validation.profileCareer[careerKey].date_from
+        return targetValidDatum
       }
+
     },
     $_validEmail(val) {
       const reg = new RegExp(

@@ -14,7 +14,7 @@ export default {
       default: {},
     },
     updateData: {
-      type: Object,
+      value: [Object, Array],
       default: {},
     },
     categoryName: {
