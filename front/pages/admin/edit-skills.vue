@@ -43,7 +43,6 @@
         </div>
         <!--edit-skill-con__category-->
 
-        {{ skillData[0].skill_category_detail }}
         <div class="edit-skill-con__details">
           <div
             v-show="isActive === skillKey"
@@ -72,7 +71,7 @@
                     <div class="form__group">
                       <div class="form__group__inputs del-point">
                         <input type="text" required v-model="detail.message" />
-                        <span class="form__group__attention">書くなら必須</span>
+                        <span class="form__group__attention">{{ $_validLength(detail, detailKey, 'skillDetails') }}</span>
                         <BaseBtnDelete
                           :deleteData="skill.skill_category_detail"
                           :dataKey="detailKey"
@@ -96,8 +95,8 @@
                 </h3>
                 <p class="edit-skill-uploads__logo">
                   <img
-                    v-if="!_.isEmpty(skill.upload_image)"
-                    :src="skill.upload_image"
+                    v-if="!_.isEmpty(skill.upload_icon_img)"
+                    :src="skill.upload_icon_img"
                     :alt="skill.name"
                   />
                   <img v-else :src="skillUrl(skill)" :alt="skill.name" />
@@ -129,7 +128,7 @@
                     required
                     v-model="skill.skill_category_comment.comment"
                   />
-                  <span class="form__group__attention">書くなら必須</span>
+                  <span class="form__group__attention">{{ $_validLength(skill.skill_category_comment, skillKey, 'skillComment') }}</span>
                 </div>
               </div>
               <!--.formgroup-->
@@ -171,7 +170,7 @@ export default {
   },
   data() {
     return {
-      isActive: 1,
+      isActive: 0,
       activeMessage: "",
     };
   },
@@ -193,13 +192,21 @@ export default {
     },
     skillImageUpload(skill, e) {
       const file = e.target.files[0];
+      //拡張子とファイルサイズのバリデーションをする
+      this.$_validFiles(file)
+
+      // upload_file
+
+      skill.skill_icon_img = file.name
       this.showSkillImage(skill, file);
     },
+    //プレビューを表示する
     showSkillImage(skill, file) {
       const reader = new FileReader();
 
       reader.onload = (e) => {
-        skill.upload_image = e.target.result;
+        skill.upload_icon_img = e.target.result;
+        console.log(e)
       };
       reader.readAsDataURL(file);
     },

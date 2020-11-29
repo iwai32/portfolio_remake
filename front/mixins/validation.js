@@ -36,11 +36,13 @@ export default {
           name: "",
         },
         skillData: [],
+        skillDetails: [],
         profileCareer: []
       },
     }
   },
   methods: {
+    //更新時に全ての入力が有効かチェックする
     $_allValidCheck(validData) {
       let isSuccess = true
       const VM = this
@@ -51,6 +53,7 @@ export default {
 
       return isSuccess
     },
+    //個別にチェックする
     $_validCheck(vData) {
       let isSuccess = true
       const VM = this
@@ -71,6 +74,7 @@ export default {
 
       return isSuccess
     },
+    //ネストされているバリデーションデータをチェックする
     $_validCheckDeeply(obj) {
       let isSuccess = true
 
@@ -107,15 +111,25 @@ export default {
         } else if (categoryName === 'skills') {
           validData = VM.validation.skillData
           pushData = {
-            name: ""
+            name: "",
+            skill_category_comment: {
+              comment: ""
+            }
           }
+          //スキルのポイント用のデータを追加する
+          VM.$_generateValidData(datum.skill_category_detail, 'skillDetails')
+        } else if (categoryName === 'skillDetails') {
 
-          //categoryなら$validpushを呼び出し追加する
+          validData = VM.validation.skillDetails
+          pushData = {
+            message: ""
+          }
         }
 
         if (_.isEmpty(validData[dataKey])) {
           VM.$_validPushData(validData, pushData)
         }
+
       })
     },
     //validation用のobjectを作成する
@@ -133,19 +147,34 @@ export default {
         //企業名の入力チェック
         validData = this.validation.profileCareer
         targetLength = data.content.length
-        targetValidDatum = !_.isEmpty(validData[dataKey]) ? validData[dataKey].content: ""
+        targetValidDatum = !_.isEmpty(validData[dataKey]) ? validData[dataKey].content : ""
       } else if (categoryName === "careerdate") {
 
         //キャリア開始日の入力チェック
         validData = this.validation.profileCareer
         targetLength = data.date_from.length
-        targetValidDatum = !_.isEmpty(validData[dataKey]) ? validData[dataKey].date_from: ""
+        targetValidDatum = !_.isEmpty(validData[dataKey]) ? validData[dataKey].date_from : ""
       } else if (categoryName === "skill") {
 
         //スキル名の入力チェック
         validData = this.validation.skillData
         targetLength = data.name.length
-        targetValidDatum = !_.isEmpty(validData[dataKey]) ? validData[dataKey].name: ""
+        targetValidDatum = !_.isEmpty(validData[dataKey]) ? validData[dataKey].name : ""
+      } else if (categoryName === "skillDetails") {
+
+        //スキルのポイント入力チェック
+        validData = this.validation.skillDetails
+        targetLength = data.message.length
+        targetValidDatum = !_.isEmpty(validData[dataKey]) ? validData[dataKey].message : ""
+      } else if (categoryName === "skillComment") {
+        validData = this.validation.skillData
+        targetLength = data.comment.length
+
+        if (!_.isEmpty(validData[dataKey]) && !_.isEmpty(validData[dataKey].skill_category_comment)) {
+          targetValidDatum = validData[dataKey].skill_category_comment.comment
+        } else {
+          targetValidDatum = ""
+        }
       }
 
 
@@ -161,6 +190,48 @@ export default {
       }
 
     },
+    //imageチェック
+    $_validFiles(file) {
+      let isUploads = false
+      let size = null;
+      let type = null;
+      let mime = null;
+
+      if (!_.isNull(file)) {
+        size = file.size
+        type = file.type
+        mime = this.$_getMime(type)
+        isUploads = this.$_validFileMime(mime)
+        isUploads = this.$_validFileSize(size)
+      }
+
+      return isUploads
+    },
+    //有効な拡張子かチェックする
+    $_validFileMime(mime) {
+      let allowExts = ['png', 'img', 'svg', 'jpeg', 'gif']
+
+      if (allowExts.includes(mime)) {
+        return true
+      }
+      return false
+    },
+    //有効なファイルサイズかチェックする
+    $_validFileSize(size) {
+      //上限サイズは3MB
+      if (size < 3000000) {
+        return true
+      }
+      return false
+    },
+    //ファイルの拡張子を取得する
+    $_getMime(type) {
+      let pos = type.lastIndexOf('/');
+      if (pos === -1) return '';
+      //拡張子を小文字にして返す
+      return type.slice(pos + 1).toLowerCase();
+    },
+    //Emailチェック
     $_validEmail(val) {
       const reg = new RegExp(
         "^[A-Za-z0-9]{1}[A-Za-z0-9_.-]*@{1}[A-Za-z0-9_.-]{1,}.[A-Za-z0-9]{1,}$"
@@ -174,6 +245,7 @@ export default {
         this.validation.login.email = "";
       }
     },
+    //Passwordチェック
     $_validPassword(val) {
       if (val.length === 0) {
         this.validation.login.password = this.msg_required;
