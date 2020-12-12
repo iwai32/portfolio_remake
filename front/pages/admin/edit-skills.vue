@@ -56,7 +56,9 @@
                 <div class="form__group">
                   <div class="form__group__inputs">
                     <input type="text" required v-model="skill.name" />
-                    <span class="form__group__attention">{{ $_validLength(skill, skillKey, 'skill') }}</span>
+                    <span class="form__group__attention">{{
+                      $_validLength(skill, skillKey, "skill")
+                    }}</span>
                   </div>
                 </div>
               </dt>
@@ -71,7 +73,9 @@
                     <div class="form__group">
                       <div class="form__group__inputs del-point">
                         <input type="text" required v-model="detail.message" />
-                        <span class="form__group__attention">{{ $_validLength(detail, detailKey, 'skillDetails') }}</span>
+                        <span class="form__group__attention">{{
+                          $_validLength(detail, detailKey, "skillDetails")
+                        }}</span>
                         <BaseBtnDelete
                           :deleteData="skill.skill_category_detail"
                           :dataKey="detailKey"
@@ -128,14 +132,24 @@
                     required
                     v-model="skill.skill_category_comment.comment"
                   />
-                  <span class="form__group__attention">{{ $_validLength(skill.skill_category_comment, skillKey, 'skillComment') }}</span>
+                  <span class="form__group__attention">{{
+                    $_validLength(
+                      skill.skill_category_comment,
+                      skillKey,
+                      "skillComment"
+                    )
+                  }}</span>
                 </div>
               </div>
               <!--.formgroup-->
             </div>
           </div>
           <div class="buttons update-button sp-on">
-            <BaseBtnUpdate :validData="validation" :updateData="skillData" :categoryName="'skill'"/>
+            <BaseBtnUpdate
+              :validData="validation"
+              :updateData="skillData"
+              :categoryName="'skill'"
+            />
           </div>
         </div>
         <!--.edit-skill-con__details-->
@@ -143,7 +157,11 @@
       <!--profile-sec__inner-->
     </section>
     <div class="buttons update-button pc-on">
-      <BaseBtnUpdate :validData="validation" :updateData="skillData" :categoryName="'skill'" />
+      <BaseBtnUpdate
+        :validData="validation"
+        :updateData="skillData"
+        :categoryName="'skill'"
+      />
     </div>
   </div>
 </template>
@@ -153,7 +171,7 @@ import { mapGetters } from "vuex";
 import BaseBtnAdd from "~/components/atoms/BaseBtnAdd";
 import BaseBtnDelete from "~/components/atoms/BaseBtnDelete";
 import BaseBtnUpdate from "~/components/atoms/BaseBtnUpdate";
-import validation from "~/mixins/validation"
+import validation from "~/mixins/validation";
 
 export default {
   layout: "mypage",
@@ -192,13 +210,16 @@ export default {
     },
     skillImageUpload(skill, e) {
       const file = e.target.files[0];
+      let isUploads = false;
       //拡張子とファイルサイズのバリデーションをする
-      this.$_validFiles(file)
+      isUploads = this.$_validFiles(file);
+
+      if (isUploads) {
+        skill.skill_icon_img = file.name;
+        this.showSkillImage(skill, file);
+      }
 
       // upload_file
-
-      skill.skill_icon_img = file.name
-      this.showSkillImage(skill, file);
     },
     //プレビューを表示する
     showSkillImage(skill, file) {
@@ -206,7 +227,7 @@ export default {
 
       reader.onload = (e) => {
         skill.upload_icon_img = e.target.result;
-        console.log(e)
+        console.log(e);
       };
       reader.readAsDataURL(file);
     },
