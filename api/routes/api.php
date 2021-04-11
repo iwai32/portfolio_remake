@@ -29,12 +29,11 @@ Route::group([
   Route::post('refresh', 'AuthController@refresh');
   Route::get('me', 'AuthController@me');
   Route::post('generate', 'AuthController@passwordGenerate');
-
   Route::post('update-profile', 'ProfileController@update');
 });
 
-// get-nav-categories
 Route::get('/nav-category', 'NavController@index');
+Route::get('/nav-category-for-admin', 'NavController@getDataForAdmin');
 Route::get('/profile', 'ProfileController@index');
 Route::get('/skill', 'SkillController@index');
 Route::get('/edit-skill', 'SkillController@edit');
