@@ -33,6 +33,8 @@ Route::group([
   Route::post('update-profile', 'ProfileController@update');
 });
 
+// get-nav-categories
+Route::get('/nav-category', 'NavController@index');
 Route::get('/profile', 'ProfileController@index');
 Route::get('/skill', 'SkillController@index');
 Route::get('/edit-skill', 'SkillController@edit');
