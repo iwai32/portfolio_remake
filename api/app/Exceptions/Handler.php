@@ -55,7 +55,7 @@ class Handler extends ExceptionHandler
       return response()->json([
         'success' => false,
         'message' => '接続に失敗しました。',
-        'status' => 800
+        'status' => 400
       ]);
     }
     return parent::render($request, $exception);
