@@ -101,6 +101,7 @@ class ProfileController extends Controller
       ->load('profilePr', 'specialSkill', 'specialHobby', 'profileCareer');
 
     $inputs = $request->all();
+
     $diffData = [
       'pr' => [
         'input' => $inputs['profile_pr'],
@@ -125,7 +126,9 @@ class ProfileController extends Controller
     ];
 
     $this->profile->find(config('const.MY_PROFILE_ID'))->update($inputs);
+
     foreach ($diffData as $data) {
+      //差分を削除
       $this->deleteDiff($data);
       $this->updateOrCreateData($data);
     }
@@ -141,9 +144,11 @@ class ProfileController extends Controller
   {
     foreach ($target['original'] as $original) {
       $diffIds = null;
+      //inputのidを格納
       $diffIds = array_column($target['input'], 'id');
 
       if (!in_array($original->id, $diffIds)) {
+        //更新前データがなかったら削除
         $original->delete();
       }
     }
