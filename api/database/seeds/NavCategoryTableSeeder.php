@@ -40,7 +40,7 @@ class NavCategoryTableSeeder extends Seeder
         ],
         [
           'name' => 'Profile',
-          'link' => '/admin/edit-profile"',
+          'link' => '/admin/edit-profile',
           'is_admin' => 1,
           'is_external_link' => 0
         ],
