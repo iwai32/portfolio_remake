@@ -137,6 +137,13 @@ class ProfileController extends Controller
         $this->updateOrCreateData($data);
       }
       DB::commit();
+
+      return response()->json([
+        'success' => true,
+        'message' => '更新しました。',
+        'status' => 200
+      ]);
+
     } catch (\Throwable $e) {
       DB::rollBack();
       throw new APIException;
