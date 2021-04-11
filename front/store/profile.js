@@ -28,14 +28,10 @@ export const actions = {
     commit
   }, params) {
 
-    try {
+    const response = await this.$axios.post(params.apiUrl, params.data).catch((err) => {
+      return err.response
+    })
 
-      const response = await this.$axios.post(params.apiUrl, params.data)
-      return response
-    } catch (error) {
-      
-      return error
-    }
-
+    return response
   }
 }

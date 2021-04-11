@@ -224,7 +224,6 @@
 
 
 <script>
-import { mapGetters } from "vuex";
 import BaseBtnAdd from "~/components/atoms/BaseBtnAdd";
 import BaseBtnDelete from "~/components/atoms/BaseBtnDelete";
 import BaseBtnUpdate from "~/components/atoms/BaseBtnUpdate";
