@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
       ProductTableSeeder::class,
       ProductDetailTableSeeder::class,
       ProductPointTableSeeder::class,
+      NavCategoryTableSeeder::class,
     ]);
 
     DB::statement('SET FOREIGN_KEY_CHECKS=1;');
