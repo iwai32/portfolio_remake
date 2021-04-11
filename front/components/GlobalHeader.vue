@@ -6,22 +6,27 @@
           <img src="~/assets/img/logo.png" alt="Portfolio-iwai" />
         </nuxt-link>
       </h1>
+
       <nav id="g-nav">
-        <ul class="navs">
-          <li class="navs__list" :class="{ current: this.$route.name === '/' }">
+        <ul class="navs" v-if="!_.isEmpty(navCategoryData)">
+          <li class="navs__list">
             <nuxt-link to="/">top</nuxt-link>
           </li>
-          <li class="navs__list" :class="{ current: this.$route.name === 'profile' }">
-            <nuxt-link to="/profile/">profile</nuxt-link>
-          </li>
-          <li class="navs__list" :class="{ current: this.$route.name === 'skill' }">
-            <nuxt-link to="/skill/">skill</nuxt-link>
-          </li>
-          <li class="navs__list" :class="{ current: this.$route.name === 'works' }">
-            <nuxt-link to="/works/">works</nuxt-link>
-          </li>
-          <li class="navs__list">
-            <a href="https://github.com/iwai32?tab=repositories" target="_blank">github</a>
+          <li
+            v-for="category in navCategoryData"
+            :key="category.id"
+            class="navs__list"
+          >
+            <span :class="{ current: $route.name === category.link.replace('/', '') }">
+              <nuxt-link
+                :to="category.link"
+                v-if="category.is_external_link === 0"
+                >{{ category.name }}</nuxt-link
+              >
+              <a v-else :href="category.link" target="_blank">{{
+                category.name
+              }}</a>
+            </span>
           </li>
         </ul>
       </nav>
@@ -29,3 +34,17 @@
     <!--.header-inner-->
   </header>
 </template>
+
+<script>
+import { mapGetters } from "vuex";
+export default {
+  created() {
+    this.$store.dispatch("navCategory/navCategoryData");
+  },
+  computed: {
+    ...mapGetters({
+      navCategoryData: "navCategory/navCategoryData",
+    }),
+  },
+};
+</script>
