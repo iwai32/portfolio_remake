@@ -14,7 +14,7 @@
     </p>
 
     <PageNavBtns
-      :PageNavBtnList="PageNavBtnList"
+      :nav-category-data="PageNavBtnList"
     />
 
     <div class="profile-typ">
@@ -64,14 +64,14 @@ export default {
       talk: true,
       PageNavBtnList: [
         {
-          title: "Profile",
-          url: "/profile",
-          activeRoute: "profile"
+          id: 1,
+          name: "Profile",
+          link: "/profile",
         },
         {
-          title: "Skill",
-          url: "/skill",
-          activeRoute: "skill"
+          id: 2,
+          name: "Skill",
+          link: "/skill",
         }
       ]
     };
