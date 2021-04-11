@@ -44,10 +44,9 @@ export default {
           data: this.updateData,
         });
 
-        if (!_.isEmpty(response) && response.status === 200) {
+        if (!_.isEmpty(response) && response.data.status === 200) {
           this.$router.push({ path: "/admin/nav", query: { update: true } });
         } else {
-          console.log(response);
           alert("システムエラーもしくは入力内容に不備があります。");
         }
       } else {
