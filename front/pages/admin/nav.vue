@@ -3,20 +3,25 @@
     <div>
       <h2 class="admin-con__title">Edit</h2>
       <TheUpdatePopUp/>
-      <PageNavBtns :PageNavBtnList="PageNavBtnList" :PageClass="'admin'" />
+      <PageNavBtns :nav-category-data="navCategoryDataForAdmin" :PageClass="'admin'" />
     </div>
   </section>
 </template>
 
 <script>
+import { mapGetters } from "vuex"
 import TheUpdatePopUp from "~/components/atoms/TheUpdatePopUp"
 import PageNavBtns from "~/components/molecules/PageNavBtns";
 
 export default {
   middleware({ store, redirect }) {
     if (!store.$auth.loggedIn) {
+      //認証指定いなかったらトップへリダイレクト
       redirect("/");
     }
+  },
+  async fetch({ store }) {
+    await store.dispatch("navCategory/navCategoryDataForAdmin");
   },
   components: {
     TheUpdatePopUp,
@@ -42,6 +47,11 @@ export default {
         },
       ],
     };
+  },
+  computed: {
+    ...mapGetters({
+      navCategoryDataForAdmin: "navCategory/navCategoryDataForAdmin"
+    })
   }
 };
 </script>

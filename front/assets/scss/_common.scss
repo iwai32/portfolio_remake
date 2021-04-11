@@ -13,6 +13,12 @@
     padding: 10px;
     transition: 0.2s;
 
+    &__text {
+      color: #ffffff;
+      font-size: 2.8rem;
+      letter-spacing: 0.25rem;
+    }
+
     .fa-arrow-right {
       display: none;
       font-size: 2.8rem;

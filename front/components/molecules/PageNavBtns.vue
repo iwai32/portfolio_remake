@@ -2,13 +2,13 @@
   <ul class="page-nav-btns" :class="PageClass">
     <li
       class="page-nav-btns__list"
-      v-for="(list, listKey) in PageNavBtnList"
-      :key="listKey"
-      :class="{ active: $route.name === list.activeRoute }"
-      @click="toPage(list.url)"
+      v-for="category in navCategoryData"
+      :key="category.id"
     >
       <i class="fa fa-arrow-right" aria-hidden="true"></i>
-      <span>{{ list.title }}</span>
+      <nuxt-link :to="category.link" class="page-nav-btns__list__text">
+        {{ category.name }}
+      </nuxt-link>
     </li>
   </ul>
   <!--page-nav-btns-->
@@ -17,18 +17,13 @@
 <script>
 export default {
   props: {
-    PageNavBtnList: {
+    navCategoryData: {
       type: Array,
       default: [],
     },
     PageClass: {
       type: String,
       default: "",
-    },
-  },
-  methods: {
-    toPage(pageUrl) {
-      this.$router.push(pageUrl);
     },
   },
 };
