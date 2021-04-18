@@ -35,7 +35,7 @@ Route::group([
 
 Route::get('/nav-category', 'NavController@index');
 Route::get('/nav-category-for-admin', 'NavController@getDataForAdmin');
-Route::get('/profile', 'ProfileController@index');
+Route::get('/profile', 'ProfileController@index')->name('profile-index');
 Route::get('/skill', 'SkillController@index');
 Route::get('/edit-skill', 'SkillController@edit');
 Route::get('/product', 'ProductController@index');

@@ -81,12 +81,15 @@ class SkillController extends Controller
    * Update the specified resource in storage.
    *
    * @param  \Illuminate\Http\Request  $request
-   * @param  int  $id
-   * @return \Illuminate\Http\Response
+   * @param  \Illuminate\Http\Request  $request
+   * @return json
    */
-  public function update(Request $request, $id)
+  public function update(Request $request)
   {
-    //
+    dd($request->all());
+    return response()->json([
+      'dfa' => 'fdaf'
+    ]);
   }
 
   /**
