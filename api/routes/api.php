@@ -29,7 +29,8 @@ Route::group([
   Route::post('refresh', 'AuthController@refresh');
   Route::get('me', 'AuthController@me');
   Route::post('generate', 'AuthController@passwordGenerate');
-  Route::post('update-profile', 'ProfileController@update');
+  Route::post('update-profile', 'ProfileController@overWriteYourProfile');
+  Route::post('update-skill', 'SkillController@update');
 });
 
 Route::get('/nav-category', 'NavController@index');

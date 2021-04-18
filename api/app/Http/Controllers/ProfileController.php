@@ -3,35 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Profile\Profile;
-use App\Models\Profile\ProfilePr;
-use App\Models\Profile\ProfileCareer;
-use App\Models\Profile\ProfileSpecialHobby;
-use App\Models\Profile\ProfileSpecialSkill;
 use App\Http\Resources\profileResource;
 use App\Exceptions\APIException;
 use Illuminate\Support\Facades\DB;
+use App\Services\ProfileService;
 
 class ProfileController extends Controller
 {
-  private $profile;
-  private $pr;
-  private $career;
-  private $specialHobby;
-  private $specialSkill;
+  public $profileService;
 
   public function __construct(
-    Profile $profile,
-    ProfilePr $pr,
-    ProfileCareer $career,
-    ProfileSpecialHobby $specialHobby,
-    ProfileSpecialSkill $specialSkill
+    ProfileService $profileService
   ) {
-    $this->profile = $profile;
-    $this->pr = $pr;
-    $this->career = $career;
-    $this->specialHobby = $specialHobby;
-    $this->specialSkill = $specialSkill;
+    $this->profileService = $profileService;
   }
 
   /**
@@ -42,10 +26,32 @@ class ProfileController extends Controller
   public function index()
   {
     return profileResource::make(
-      $this->profile->find(config('const.MY_PROFILE_ID'))
-        ->load('profilePr', 'specialSkill', 'specialHobby', 'profileCareer')
+      $this->profileService->getMyProfile()
     );
   }
+
+  /**
+   * overWriteYourProfile the specified resource in storage.
+   *
+   * @param  \Illuminate\Http\Request  $request
+   * @return object
+   */
+   public function overWriteYourProfile(Request $request): object
+   {
+     return DB::transaction(function () use ($request) {
+       try {
+         $this->profileService->overWriteYourProfile($request->all());
+ 
+         return response()->json([
+           'success' => true,
+           'message' => '更新しました。',
+           'status' => 200
+         ]);
+       } catch (\Throwable $e) {
+         throw new APIException;
+       }
+     });
+   }
 
   /**
    * Show the form for creating a new resource.
@@ -87,102 +93,6 @@ class ProfileController extends Controller
   public function edit($id)
   {
     //
-  }
-
-  /**
-   * Update the specified resource in storage.
-   *
-   * @param  \Illuminate\Http\Request  $request
-   * @return json
-   */
-  public function update(Request $request)
-  {
-    return DB::transaction(function () use ($request) {
-      try {
-        $profileData = $this->profile
-          ->find(config('const.MY_PROFILE_ID'))
-          ->load('profilePr', 'specialSkill', 'specialHobby', 'profileCareer');
-
-        $inputs = $request->all();
-
-        $diffData = [
-          'pr' => [
-            'input' => $inputs['profile_pr'],
-            'original' => $profileData->profilePr,
-            'model' => $this->pr
-          ],
-          'spSkill' => [
-            'input' => $inputs['special_skill'],
-            'original' => $profileData->specialSkill,
-            'model' => $this->specialSkill
-          ],
-          'spHobby' => [
-            'input' => $inputs['special_hobby'],
-            'original' => $profileData->specialHobby,
-            'model' => $this->specialHobby
-          ],
-          'prCareer' => [
-            'input' => $inputs['profile_career'],
-            'original' => $profileData->profileCareer,
-            'model' => $this->career
-          ],
-        ];
-
-        $this->profile->find(config('const.MY_PROFILE_ID'))->update($inputs);
-
-        foreach ($diffData as $data) {
-          //差分を削除
-          $this->deleteDiff($data);
-          $this->updateOrCreateData($data);
-        }
-
-        return response()->json([
-          'success' => true,
-          'message' => '更新しました。',
-          'status' => 200
-        ]);
-
-      } catch (\Throwable $e) {
-        throw new APIException;
-      }
-    });
-  }
-
-  /**
-   * 元々DBに保存されているデータのidとリクエストで送られてきたidを比較し、差分を削除する
-   *
-   * @param array $target
-   * @return void
-   */
-  public function deleteDiff(array $target): void
-  {
-    foreach ($target['original'] as $original) {
-      $diffIds = null;
-      //inputのidを格納
-      $diffIds = array_column($target['input'], 'id');
-
-      if (!in_array($original->id, $diffIds)) {
-        //更新前データがなかったら削除
-        $original->delete();
-      }
-    }
-  }
-
-  /**
-   * 更新か削除をする
-   *
-   * @param array $target
-   * @return void
-   */
-  public function updateOrCreateData(array $target): void
-  {
-    foreach ($target['input'] as $input) {
-      $input['profile_id'] = config('const.MY_PROFILE_ID');
-      $target['model']->updateOrCreate(
-        ['id' => isset($input['id']) ? $input['id'] : 0],
-        $input
-      );
-    }
   }
 
   /**
