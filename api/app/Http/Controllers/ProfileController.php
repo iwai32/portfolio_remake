@@ -93,61 +93,59 @@ class ProfileController extends Controller
    * Update the specified resource in storage.
    *
    * @param  \Illuminate\Http\Request  $request
-   * @param  int  $id
-   * @return \Illuminate\Http\Response
+   * @return json
    */
   public function update(Request $request)
   {
-    DB::beginTransaction();
-    try {
-      $profileData = $this->profile
-        ->find(config('const.MY_PROFILE_ID'))
-        ->load('profilePr', 'specialSkill', 'specialHobby', 'profileCareer');
+    return DB::transaction(function () use ($request) {
+      try {
+        $profileData = $this->profile
+          ->find(config('const.MY_PROFILE_ID'))
+          ->load('profilePr', 'specialSkill', 'specialHobby', 'profileCareer');
 
-      $inputs = $request->all();
+        $inputs = $request->all();
 
-      $diffData = [
-        'pr' => [
-          'input' => $inputs['profile_pr'],
-          'original' => $profileData->profilePr,
-          'model' => $this->pr
-        ],
-        'spSkill' => [
-          'input' => $inputs['special_skill'],
-          'original' => $profileData->specialSkill,
-          'model' => $this->specialSkill
-        ],
-        'spHobby' => [
-          'input' => $inputs['special_hobby'],
-          'original' => $profileData->specialHobby,
-          'model' => $this->specialHobby
-        ],
-        'prCareer' => [
-          'input' => $inputs['profile_career'],
-          'original' => $profileData->profileCareer,
-          'model' => $this->career
-        ],
-      ];
+        $diffData = [
+          'pr' => [
+            'input' => $inputs['profile_pr'],
+            'original' => $profileData->profilePr,
+            'model' => $this->pr
+          ],
+          'spSkill' => [
+            'input' => $inputs['special_skill'],
+            'original' => $profileData->specialSkill,
+            'model' => $this->specialSkill
+          ],
+          'spHobby' => [
+            'input' => $inputs['special_hobby'],
+            'original' => $profileData->specialHobby,
+            'model' => $this->specialHobby
+          ],
+          'prCareer' => [
+            'input' => $inputs['profile_career'],
+            'original' => $profileData->profileCareer,
+            'model' => $this->career
+          ],
+        ];
 
-      $this->profile->find(config('const.MY_PROFILE_ID'))->update($inputs);
+        $this->profile->find(config('const.MY_PROFILE_ID'))->update($inputs);
 
-      foreach ($diffData as $data) {
-        //差分を削除
-        $this->deleteDiff($data);
-        $this->updateOrCreateData($data);
+        foreach ($diffData as $data) {
+          //差分を削除
+          $this->deleteDiff($data);
+          $this->updateOrCreateData($data);
+        }
+
+        return response()->json([
+          'success' => true,
+          'message' => '更新しました。',
+          'status' => 200
+        ]);
+
+      } catch (\Throwable $e) {
+        throw new APIException;
       }
-      DB::commit();
-
-      return response()->json([
-        'success' => true,
-        'message' => '更新しました。',
-        'status' => 200
-      ]);
-
-    } catch (\Throwable $e) {
-      DB::rollBack();
-      throw new APIException;
-    }
+    });
   }
 
   /**
